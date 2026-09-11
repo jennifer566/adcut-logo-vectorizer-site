@@ -2,8 +2,7 @@ const header = document.querySelector("[data-header]");
 const nav = document.querySelector("[data-nav]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const canvas = document.getElementById("vectorCanvas");
-const copyTeamButton = document.querySelector("[data-copy-team]");
-const teamEmails = document.querySelector("[data-team-emails]");
+const copyEmailButtons = document.querySelectorAll("[data-copy-email]");
 const copyStatus = document.querySelector("[data-copy-status]");
 
 const setHeaderState = () => {
@@ -30,21 +29,19 @@ if (navToggle && nav) {
 window.addEventListener("scroll", setHeaderState, { passive: true });
 setHeaderState();
 
-if (copyTeamButton && teamEmails && copyStatus) {
-  copyTeamButton.addEventListener("click", async () => {
-    const emails = teamEmails.textContent.trim();
-
+if (copyEmailButtons.length && copyStatus) {
+  copyEmailButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const email = button.dataset.copyEmail;
+      if (!email) return;
+  
     try {
-      await navigator.clipboard.writeText(emails);
-      copyStatus.textContent = "Copied team emails for easy paste.";
+        await navigator.clipboard.writeText(email);
+        copyStatus.textContent = `Copied ${email}.`;
     } catch {
-      const selection = window.getSelection();
-      const range = document.createRange();
-      range.selectNodeContents(teamEmails);
-      selection.removeAllRanges();
-      selection.addRange(range);
-      copyStatus.textContent = "Emails selected. Press Ctrl+C to copy.";
+        copyStatus.textContent = `Copy ${email}.`;
     }
+    });
   });
 }
 

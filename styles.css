@@ -745,6 +745,26 @@ address a {
   overflow-wrap: anywhere;
 }
 
+.contact-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.contact-row button {
+  min-height: 34px;
+  border: 0;
+  border-radius: 8px;
+  padding: 7px 11px;
+  color: var(--unc-navy);
+  background: var(--carolina);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
 .team-email-box {
   display: grid;
   gap: 12px;
@@ -946,6 +966,14 @@ address a {
   .schedule-table [role="row"]:not(.table-head) span:first-child {
     color: var(--unc-navy);
     font-weight: 900;
+  }
+
+  .contact-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-row button {
+    width: fit-content;
   }
 
   .footer-inner {
