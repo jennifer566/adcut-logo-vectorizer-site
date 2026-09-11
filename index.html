@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Adcut Logo Vectorizer is a UNC COMP 523 project building a local Windows tool that converts customer logos into 2D CAD drawings for water jet cutting.">
+  <title>Adcut Logo Vectorizer | UNC COMP 523</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header" data-header>
+    <a class="brand" href="#top" aria-label="Adcut Logo Vectorizer home">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span>
+        <strong>Adcut Logo Vectorizer</strong>
+        <small>UNC COMP 523</small>
+      </span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="site-nav" data-nav>
+      <a href="#overview">Overview</a>
+      <a href="#workflow">Workflow</a>
+      <a href="#technical-design">Technical Design</a>
+      <a href="#deliverables">Deliverables</a>
+      <a class="nav-cta" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section-pad">
+      <div class="hero-grid content-shell">
+        <div class="hero-copy">
+          <p class="eyebrow">Open-source CAD preparation for water jet cutting</p>
+          <h1>Adcut Logo Vectorizer</h1>
+          <p class="hero-lede">A local Windows application that turns customer logo artwork into clean, material-aware 2D CAD drawings ready for flooring and turf fabrication.</p>
+          <div class="hero-actions" aria-label="Primary page actions">
+            <a class="button primary" href="#workflow">View Workflow</a>
+            <a class="button secondary" href="#technical-design">Explore Stack</a>
+          </div>
+          <dl class="hero-facts" aria-label="Project highlights">
+            <div>
+              <dt>Inputs</dt>
+              <dd>JPEG, PNG, WEBP, GIF, PDF</dd>
+            </div>
+            <div>
+              <dt>Outputs</dt>
+              <dd>SVG, R12/R2000 DXF</dd>
+            </div>
+            <div>
+              <dt>Platform</dt>
+              <dd>Local Windows tool</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="hero-visual" aria-label="Illustration of color regions becoming closed vector paths">
+          <div class="visual-toolbar">
+            <span></span>
+            <span></span>
+            <span></span>
+            <strong>logo-to-cad.preview</strong>
+          </div>
+          <div class="vector-stage">
+            <canvas id="vectorCanvas" width="760" height="520" aria-hidden="true"></canvas>
+            <div class="stage-label top-left">Color regions</div>
+            <div class="stage-label bottom-right">Closed CAD paths</div>
+          </div>
+          <div class="visual-footer">
+            <span>Material channels</span>
+            <div class="material-dots" aria-hidden="true">
+              <i class="mat-blue"></i>
+              <i class="mat-green"></i>
+              <i class="mat-gold"></i>
+              <i class="mat-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad offwhite" id="overview">
+      <div class="content-shell two-column">
+        <div>
+          <p class="eyebrow">Project Overview</p>
+          <h2>From customer artwork to cut-ready geometry.</h2>
+        </div>
+        <div class="copy-block">
+          <p>Adcut needs a dependable local tool for converting customer logos into 2D CAD drawings used in water jet cutting. The key challenge is preserving color boundaries as separate, closed vector paths because each logo color represents a different flooring or turf material.</p>
+          <p>The project focuses on an open-source stack that can run on Windows without relying on cloud processing, while still giving operators enough review and adjustment controls before export.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="workflow">
+      <div class="content-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Workflow</p>
+          <h2>Five steps from upload to fabrication file.</h2>
+        </div>
+        <div class="workflow-grid">
+          <article class="workflow-step">
+            <span>01</span>
+            <h3>Upload Image</h3>
+            <p>Accept common customer file formats including JPEG, PNG, WEBP, GIF, and PDF.</p>
+          </article>
+          <article class="workflow-step">
+            <span>02</span>
+            <h3>Color Reduction</h3>
+            <p>Group similar colors into manageable material channels while preserving important logo features.</p>
+          </article>
+          <article class="workflow-step">
+            <span>03</span>
+            <h3>Vectorization</h3>
+            <p>Trace each color channel into closed paths suitable for downstream CAD handling.</p>
+          </article>
+          <article class="workflow-step">
+            <span>04</span>
+            <h3>Review and Tweak</h3>
+            <p>Let users inspect boundaries, adjust simplification, and confirm that paths are watertight.</p>
+          </article>
+          <article class="workflow-step">
+            <span>05</span>
+            <h3>Export</h3>
+            <p>Produce SVG and DXF files, including R12/R2000 DXF compatibility targets.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad navy-band" id="technical-design">
+      <div class="content-shell">
+        <div class="section-heading inverted">
+          <p class="eyebrow">Technical Design</p>
+          <h2>An open-source local pipeline built for operator control.</h2>
+        </div>
+        <div class="tech-layout">
+          <article class="tech-panel large">
+            <h3>Proposed Application Layer</h3>
+            <p>Streamlit provides a fast Python-first path for a local prototype, while React or Vue can support a more customized desktop-style interface if the project shifts toward a richer front end.</p>
+          </article>
+          <article class="tech-panel">
+            <h3>Image Processing</h3>
+            <p>OpenCV handles preprocessing, color clustering, cleanup, contour detection, and preview generation.</p>
+          </article>
+          <article class="tech-panel">
+            <h3>Vector Tracing</h3>
+            <p>Potrace or vtracer can convert separated regions into smooth vector paths for each material color.</p>
+          </article>
+          <article class="tech-panel">
+            <h3>CAD Export</h3>
+            <p>ezdxf supports DXF generation, with SVG output available for inspection and interchange.</p>
+          </article>
+          <article class="tech-panel">
+            <h3>Packaging</h3>
+            <p>Docker can stabilize development environments; PyInstaller can package a Windows-friendly local tool.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad offwhite" id="team">
+      <div class="content-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Team</p>
+          <h2>UNC COMP 523 project team.</h2>
+        </div>
+        <div class="team-grid">
+          <article class="person-card lead">
+            <span class="avatar">JL</span>
+            <h3>Jennifer Lee</h3>
+            <p>Team Contact</p>
+            <a href="mailto:jclee1@unc.edu">jclee1@unc.edu</a>
+          </article>
+          <article class="person-card">
+            <span class="avatar">HT</span>
+            <h3>Hamsini Tankala</h3>
+            <p>Project Team</p>
+            <a href="mailto:htankala@ad.unc.edu">htankala@ad.unc.edu</a>
+          </article>
+          <article class="person-card">
+            <span class="avatar">VN</span>
+            <h3>Vibhas Nair</h3>
+            <p>Project Team</p>
+            <a href="mailto:vibhasn@ad.unc.edu">vibhasn@ad.unc.edu</a>
+          </article>
+          <article class="person-card">
+            <span class="avatar">AT</span>
+            <h3>Alex Tang</h3>
+            <p>Project Team</p>
+            <a href="mailto:alextang@unc.edu">alextang@unc.edu</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="journal">
+      <div class="content-shell journal-layout">
+        <div>
+          <p class="eyebrow">Project Journal</p>
+          <h2>Progress notes will track design choices, experiments, and client feedback.</h2>
+        </div>
+        <div class="journal-list">
+          <article>
+            <time datetime="2026-09">September 2026</time>
+            <h3>Project kickoff</h3>
+            <p>Defined the problem space around color-separated logos, closed vector paths, local Windows execution, and CAD export needs.</p>
+          </article>
+          <article>
+            <time datetime="2026-09">Upcoming</time>
+            <h3>Prototype pipeline</h3>
+            <p>Evaluate color reduction and tracing options using representative logo samples from the client workflow.</p>
+          </article>
+          <article>
+            <time datetime="2026-09">Upcoming</time>
+            <h3>Operator review loop</h3>
+            <p>Design controls for simplifying paths, checking closure, and comparing source colors against material channels.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad offwhite" id="deliverables">
+      <div class="content-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Deliverables</p>
+          <h2>D1-D5 milestones.</h2>
+        </div>
+        <div class="deliverable-grid">
+          <article>
+            <span>D1</span>
+            <h3>Project Proposal</h3>
+            <p>Scope, stakeholders, goals, constraints, and success criteria for the vectorization tool.</p>
+          </article>
+          <article>
+            <span>D2</span>
+            <h3>Design and Plan</h3>
+            <p>Architecture, workflow, data formats, algorithm choices, and implementation plan.</p>
+          </article>
+          <article>
+            <span>D3</span>
+            <h3>Prototype</h3>
+            <p>Working image-to-vector pipeline with early interface and export experiments.</p>
+          </article>
+          <article>
+            <span>D4</span>
+            <h3>Refinement</h3>
+            <p>Client feedback, usability improvements, robustness testing, and packaging work.</p>
+          </article>
+          <article>
+            <span>D5</span>
+            <h3>Final Delivery</h3>
+            <p>Completed tool, documentation, project summary, and handoff materials.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-band" id="contact">
+      <div class="content-shell contact-layout">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Project coordination and client contact.</h2>
+        </div>
+        <address>
+          <strong>Team Contact</strong>
+          <a href="mailto:jclee1@unc.edu">Jennifer Lee - jclee1@unc.edu</a>
+          <strong>Client</strong>
+          <a href="mailto:ndokich@gmail.com">Nick Dokich - ndokich@gmail.com</a>
+        </address>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="content-shell footer-inner">
+      <p>Adcut Logo Vectorizer, UNC COMP 523</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
