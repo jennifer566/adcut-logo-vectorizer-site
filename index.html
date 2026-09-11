@@ -26,8 +26,9 @@
     </button>
     <nav class="site-nav" data-nav>
       <a href="#overview">Overview</a>
+      <a href="#roles">Roles</a>
       <a href="#workflow">Workflow</a>
-      <a href="#technical-design">Technical Design</a>
+      <a href="#meetings">Meetings</a>
       <a href="#deliverables">Deliverables</a>
       <a class="nav-cta" href="#contact">Contact</a>
     </nav>
@@ -41,8 +42,8 @@
           <h1>Adcut Logo Vectorizer</h1>
           <p class="hero-lede">A local Windows application that turns customer logo artwork into clean, material-aware 2D CAD drawings ready for flooring and turf fabrication.</p>
           <div class="hero-actions" aria-label="Primary page actions">
-            <a class="button primary" href="#workflow">View Workflow</a>
-            <a class="button secondary" href="#technical-design">Explore Stack</a>
+            <a class="button primary" href="#contact">Contact Team</a>
+            <a class="button secondary" href="#deliverables">View Deliverables</a>
           </div>
           <dl class="hero-facts" aria-label="Project highlights">
             <div>
@@ -93,7 +94,38 @@
         </div>
         <div class="copy-block">
           <p>Adcut needs a dependable local tool for converting customer logos into 2D CAD drawings used in water jet cutting. The key challenge is preserving color boundaries as separate, closed vector paths because each logo color represents a different flooring or turf material.</p>
-          <p>The project focuses on an open-source stack that can run on Windows without relying on cloud processing, while still giving operators enough review and adjustment controls before export.</p>
+          <p>The target users are internal Adcut operators and CNC programmers who prepare files for water jet cutting. The project focuses on an open-source stack that can run on Windows without cloud processing, while still giving operators enough review and adjustment controls before export.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="roles">
+      <div class="content-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Team Roles</p>
+          <h2>Responsibilities for the semester.</h2>
+        </div>
+        <div class="roles-grid">
+          <article>
+            <span>Client Manager</span>
+            <h3>Jennifer Lee</h3>
+            <p>Primary development-team contact for course and client coordination.</p>
+          </article>
+          <article>
+            <span>Project Manager</span>
+            <h3>Hamsini Tankala</h3>
+            <p>Tracks milestones, meeting follow-ups, and project schedule updates.</p>
+          </article>
+          <article>
+            <span>Technical Lead</span>
+            <h3>Vibhas Nair</h3>
+            <p>Coordinates architecture decisions for image processing, tracing, and export.</p>
+          </article>
+          <article>
+            <span>Web and Documentation Lead</span>
+            <h3>Alex Tang</h3>
+            <p>Maintains the project website, deliverable links, and public-facing documentation.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -165,6 +197,35 @@
       </div>
     </section>
 
+    <section class="section-pad" id="requirements">
+      <div class="content-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Specifications</p>
+          <h2>Initial functional and non-functional requirements.</h2>
+        </div>
+        <div class="requirements-grid">
+          <article>
+            <h3>Functional Requirements</h3>
+            <ul>
+              <li>Accept JPEG, PNG, WEBP, GIF, and PDF artwork files.</li>
+              <li>Allow configurable color reduction to match logo colors to material zones.</li>
+              <li>Generate accurate closed paths along color boundaries without gaps or overlaps.</li>
+              <li>Export standard SVG and R12/R2000 compliant DXF files for CNC preparation.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Non-Functional Requirements</h3>
+            <ul>
+              <li>Run locally on an operator's Windows machine.</li>
+              <li>Avoid cloud dependencies to support privacy and reliable shop-floor use.</li>
+              <li>Use open-source, commercially viable tools with no recurring licensing fees.</li>
+              <li>Provide a straightforward interface for non-software engineers.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section-pad offwhite" id="team">
       <div class="content-shell">
         <div class="section-heading">
@@ -200,27 +261,73 @@
       </div>
     </section>
 
+    <section class="section-pad" id="meetings">
+      <div class="content-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Schedule</p>
+          <h2>Regular meetings and project touchpoints.</h2>
+        </div>
+        <div class="schedule-table" role="table" aria-label="Regular meeting schedule">
+          <div role="row" class="table-head">
+            <span role="columnheader">Meeting</span>
+            <span role="columnheader">Cadence</span>
+            <span role="columnheader">Notes</span>
+          </div>
+          <div role="row">
+            <span role="cell">Professor/manager meeting</span>
+            <span role="cell">Weekly, time to be confirmed</span>
+            <span role="cell">Used for progress review, blockers, and next actions.</span>
+          </div>
+          <div role="row">
+            <span role="cell">Client meeting</span>
+            <span role="cell">As scheduled with Nick Dokich</span>
+            <span role="cell">Used to validate workflow assumptions and sample logo requirements.</span>
+          </div>
+          <div role="row">
+            <span role="cell">Team meeting</span>
+            <span role="cell">Weekly, time to be confirmed</span>
+            <span role="cell">Used for implementation planning, deliverable updates, and task ownership.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad offwhite" id="rules">
+      <div class="content-shell two-column">
+        <div>
+          <p class="eyebrow">Team Rules</p>
+          <h2>Working agreements and coding practices.</h2>
+        </div>
+        <div class="rules-list">
+          <p><strong>Communication:</strong> Keep project decisions visible to the full team and document action items after meetings.</p>
+          <p><strong>Version control:</strong> Use GitHub as the source of truth for website and code updates.</p>
+          <p><strong>Review:</strong> Check major changes with at least one teammate before treating them as final.</p>
+          <p><strong>Client focus:</strong> Prioritize local Windows usability, clean CAD output, and clear operator controls.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section-pad" id="journal">
       <div class="content-shell journal-layout">
         <div>
           <p class="eyebrow">Project Journal</p>
-          <h2>Progress notes will track design choices, experiments, and client feedback.</h2>
+          <h2>Meetings and decisions in reverse chronological order.</h2>
         </div>
         <div class="journal-list">
+          <article>
+            <time datetime="2026-09-11">September 11, 2026</time>
+            <h3>Website update</h3>
+            <p>Updated the project page to align with course website expectations, including roles, contact information, meeting schedule, team rules, journal, related links, and deliverables.</p>
+          </article>
+          <article>
+            <time datetime="2026-09-09">September 9, 2026</time>
+            <h3>Initial requirements draft</h3>
+            <p>Captured the product objective, target users, workflow, input and output formats, and proposed open-source technology stack.</p>
+          </article>
           <article>
             <time datetime="2026-09">September 2026</time>
             <h3>Project kickoff</h3>
             <p>Defined the problem space around color-separated logos, closed vector paths, local Windows execution, and CAD export needs.</p>
-          </article>
-          <article>
-            <time datetime="2026-09">Upcoming</time>
-            <h3>Prototype pipeline</h3>
-            <p>Evaluate color reduction and tracing options using representative logo samples from the client workflow.</p>
-          </article>
-          <article>
-            <time datetime="2026-09">Upcoming</time>
-            <h3>Operator review loop</h3>
-            <p>Design controls for simplifying paths, checking closure, and comparing source colors against material channels.</p>
           </article>
         </div>
       </div>
@@ -235,29 +342,46 @@
         <div class="deliverable-grid">
           <article>
             <span>D1</span>
-            <h3>Project Proposal</h3>
-            <p>Scope, stakeholders, goals, constraints, and success criteria for the vectorization tool.</p>
+            <h3>Specifications</h3>
+            <p>User stories plus functional, non-functional, interface, and other requirements.</p>
           </article>
           <article>
             <span>D2</span>
-            <h3>Design and Plan</h3>
+            <h3>Design Document</h3>
             <p>Architecture, workflow, data formats, algorithm choices, and implementation plan.</p>
           </article>
           <article>
             <span>D3</span>
-            <h3>Prototype</h3>
-            <p>Working image-to-vector pipeline with early interface and export experiments.</p>
+            <h3>Test Plan</h3>
+            <p>Validation plan for tracing quality, file compatibility, operator workflow, and exports.</p>
           </article>
           <article>
             <span>D4</span>
-            <h3>Refinement</h3>
-            <p>Client feedback, usability improvements, robustness testing, and packaging work.</p>
+            <h3>User Manual</h3>
+            <p>Operator guidance for upload, color reduction, review, tweak, and export workflows.</p>
           </article>
           <article>
             <span>D5</span>
-            <h3>Final Delivery</h3>
-            <p>Completed tool, documentation, project summary, and handoff materials.</p>
+            <h3>Code</h3>
+            <p>Final project source code, packaging notes, and client handoff materials.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="links">
+      <div class="content-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Related Links</p>
+          <h2>Resources for course tracking and implementation.</h2>
+        </div>
+        <div class="links-grid">
+          <a href="https://www.cs.unc.edu/~stotts/COMP523-F26/website.html">COMP 523 website directions</a>
+          <a href="https://www.cs.unc.edu/~stotts/COMP523-F26/deliverables.html">COMP 523 deliverables</a>
+          <a href="https://www.cs.unc.edu/~stotts/COMP523-F26/funcSpec.html">COMP 523 specifications guide</a>
+          <a href="https://github.com/jennifer566/adcut-logo-vectorizer-site">Project website repository</a>
+          <a href="https://opencv.org/">OpenCV</a>
+          <a href="https://ezdxf.readthedocs.io/">ezdxf</a>
         </div>
       </div>
     </section>
@@ -268,12 +392,28 @@
           <p class="eyebrow">Contact</p>
           <h2>Project coordination and client contact.</h2>
         </div>
-        <address>
-          <strong>Team Contact</strong>
-          <a href="mailto:jclee1@unc.edu">Jennifer Lee - jclee1@unc.edu</a>
-          <strong>Client</strong>
-          <a href="mailto:ndokich@gmail.com">Nick Dokich - ndokich@gmail.com</a>
-        </address>
+        <div class="contact-stack">
+          <address>
+            <strong>Development Team</strong>
+            <span>Jennifer Lee - <a href="mailto:jclee1@unc.edu">jclee1@unc.edu</a></span>
+            <span>Hamsini Tankala - <a href="mailto:htankala@ad.unc.edu">htankala@ad.unc.edu</a></span>
+            <span>Vibhas Nair - <a href="mailto:vibhasn@ad.unc.edu">vibhasn@ad.unc.edu</a></span>
+            <span>Alex Tang - <a href="mailto:alextang@unc.edu">alextang@unc.edu</a></span>
+            <strong>Client</strong>
+            <span>Nick Dokich - <a href="mailto:ndokich@gmail.com">ndokich@gmail.com</a></span>
+            <strong>Consultants</strong>
+            <span>No consultants identified yet.</span>
+          </address>
+          <div class="team-email-box">
+            <span>Entire development team</span>
+            <code data-team-emails>jclee1@unc.edu, htankala@ad.unc.edu, vibhasn@ad.unc.edu, alextang@unc.edu</code>
+            <div class="email-actions">
+              <button type="button" data-copy-team>Copy team emails</button>
+              <a href="mailto:jclee1@unc.edu,htankala@ad.unc.edu,vibhasn@ad.unc.edu,alextang@unc.edu">Open email draft</a>
+            </div>
+            <p data-copy-status aria-live="polite"></p>
+          </div>
+        </div>
       </div>
     </section>
   </main>

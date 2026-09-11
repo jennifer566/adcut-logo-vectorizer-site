@@ -2,6 +2,9 @@ const header = document.querySelector("[data-header]");
 const nav = document.querySelector("[data-nav]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const canvas = document.getElementById("vectorCanvas");
+const copyTeamButton = document.querySelector("[data-copy-team]");
+const teamEmails = document.querySelector("[data-team-emails]");
+const copyStatus = document.querySelector("[data-copy-status]");
 
 const setHeaderState = () => {
   if (!header) return;
@@ -26,6 +29,24 @@ if (navToggle && nav) {
 
 window.addEventListener("scroll", setHeaderState, { passive: true });
 setHeaderState();
+
+if (copyTeamButton && teamEmails && copyStatus) {
+  copyTeamButton.addEventListener("click", async () => {
+    const emails = teamEmails.textContent.trim();
+
+    try {
+      await navigator.clipboard.writeText(emails);
+      copyStatus.textContent = "Copied team emails for easy paste.";
+    } catch {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(teamEmails);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      copyStatus.textContent = "Emails selected. Press Ctrl+C to copy.";
+    }
+  });
+}
 
 if (canvas) {
   const ctx = canvas.getContext("2d");
