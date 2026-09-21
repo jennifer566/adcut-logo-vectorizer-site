@@ -825,6 +825,27 @@ address a {
   font-size: 0.88rem;
 }
 
+.spec-document {
+  max-width: 900px;
+  overflow-wrap: anywhere;
+}
+
+.spec-document h1 {
+  font-size: 2.5rem;
+}
+
+.spec-document h2 {
+  font-size: 1.5rem;
+}
+
+.spec-document section {
+  margin-top: 36px;
+}
+
+.spec-document li + li {
+  margin-top: 8px;
+}
+
 .site-footer {
   color: #6d7b8f;
   background: #071a33;

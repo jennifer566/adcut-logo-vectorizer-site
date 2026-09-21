@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Draft D1 specifications for Adcut Logo Vectorizer. Client confirmation is pending.">
+  <title>D1 Specifications Draft | Adcut Logo Vectorizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">A</span><span><strong>Adcut Logo Vectorizer</strong><small>UNC COMP 523</small></span></a>
+  </header>
+  <main class="spec-document content-shell section-pad">
+    <p><a href="index.html#deliverables">Back to project deliverables</a></p>
+    <p class="eyebrow">D1 Specifications</p>
+    <h1>Specifications draft</h1>
+    <p><strong>Status: Draft - awaiting client confirmation.</strong><br>Last updated: <time datetime="2026-09-20">September 20, 2026</time></p>
+    <p>This document records the initial project brief, not an approved specification. Client meetings planned for September 15 and September 18 did not take place because of technical difficulties on the client's side. Jennifer sent a list of questions instead; no response has been received as of September 20. Detailed requirements, priorities, and acceptance criteria remain open.</p>
+
+    <section>
+      <h2>Purpose and intended users</h2>
+      <p>The project brief describes a local Windows tool for Adcut that converts customer logos into 2D CAD drawings for water jet cutting. Different logo colors represent different flooring or turf materials, so color boundaries must become separate closed vector paths. Intended users identified in the brief are Adcut operators and CNC programmers.</p>
+    </section>
+    <section>
+      <h2>Initial functional requirements</h2>
+      <p>The following are drawn from the project brief and remain subject to client validation:</p>
+      <ul>
+        <li>Accept JPEG, PNG, WEBP, GIF, and PDF input.</li>
+        <li>Provide configurable color reduction to separate material regions.</li>
+        <li>Trace color boundaries into closed vector paths without gaps or overlaps.</li>
+        <li>Allow review and adjustment before export.</li>
+        <li>Export SVG and R12/R2000 DXF files.</li>
+      </ul>
+      <p>Proposed workflow: upload image &rarr; color reduction &rarr; vectorization &rarr; review and tweak &rarr; SVG/DXF export.</p>
+    </section>
+    <section>
+      <h2>Initial non-functional requirements</h2>
+      <ul>
+        <li>Run locally on Windows.</li>
+        <li>Use an open-source, commercially viable stack.</li>
+        <li>Provide an intuitive interface for operators.</li>
+      </ul>
+      <p>Supported Windows versions, hardware requirements, processing-time targets, accuracy tolerances, and measurable usability criteria have not been confirmed.</p>
+    </section>
+    <section>
+      <h2>Draft user stories</h2>
+      <p>These are team interpretations of the project brief, not statements collected from a client interview.</p>
+      <ul>
+        <li>As an Adcut operator, I want to import customer artwork so that I can prepare it for CAD conversion.</li>
+        <li>As an Adcut operator, I want to reduce colors into material regions so that each region can be represented by closed paths.</li>
+        <li>As an Adcut operator, I want to review and adjust the traced result before exporting it.</li>
+        <li>As a CNC programmer, I want SVG or DXF output that can be used in the downstream cutting workflow.</li>
+      </ul>
+      <p>Story priorities and acceptance criteria are pending client input.</p>
+    </section>
+    <section>
+      <h2>Interfaces and implementation options</h2>
+      <p>The brief proposes Streamlit or React/Vue for the interface, OpenCV for image processing, Potrace/vtracer for tracing, ezdxf for CAD export, and Docker/PyInstaller for development or packaging. These are candidate technologies, not final design decisions.</p>
+      <p>The downstream CAD/CAM software, required DXF entities, units and scale, layer conventions, and installation approach are not yet confirmed. No screen layout or detailed interface behavior has been approved.</p>
+    </section>
+    <section>
+      <h2>Open questions for client validation</h2>
+      <p>The following identify gaps in this draft. They are not a verbatim copy of the questions already emailed to the client.</p>
+      <ul>
+        <li>What is the current logo-to-CAD workflow, and which steps cause the most difficulty?</li>
+        <li>Which input and export formats are essential for the first version?</li>
+        <li>What sample logos and corresponding acceptable CAD outputs can be used for validation?</li>
+        <li>How should colors map to materials, and which adjustments must operators be able to make?</li>
+        <li>What geometric tolerances, minimum feature sizes, units, and scaling rules are required?</li>
+        <li>Which CAD/CAM tools must accept the exported files?</li>
+        <li>Which Windows versions and hardware must be supported?</li>
+        <li>What processing times, usability expectations, and acceptance tests define success?</li>
+        <li>What features are priorities, and what is outside the agreed project scope?</li>
+      </ul>
+      <p>No numerical thresholds, performance promises, or final scope commitments are set in this draft.</p>
+    </section>
+    <section>
+      <h2>Sources and review status</h2>
+      <p>Source for the initial product description: the supplied Adcut project brief, <cite>dok-adcut.docx</cite>. Meeting and communication status: team update dated September 20, 2026.</p>
+      <p>The September 15 TA meeting covered expectations and <a href="https://hackmd.io/zci0WxDvSfC9OpvXnEK2Aw?view">this HackMD material</a>. It is linked for reference, not treated as client approval of the requirements.</p>
+      <p>Next review: incorporate the client's answers when received and confirm scope and acceptance criteria with the client.</p>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="content-shell footer-inner"><p>Adcut Logo Vectorizer, UNC COMP 523</p><a href="index.html">Project website</a></div></footer>
+</body>
+</html>
