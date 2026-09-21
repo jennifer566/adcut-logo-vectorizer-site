@@ -59,25 +59,55 @@
       <p>The brief proposes Streamlit or React/Vue for the interface, OpenCV for image processing, Potrace/vtracer for tracing, ezdxf for CAD export, and Docker/PyInstaller for development or packaging. These are candidate technologies, not final design decisions.</p>
       <p>The downstream CAD/CAM software, required DXF entities, units and scale, layer conventions, and installation approach are not yet confirmed. No screen layout or detailed interface behavior has been approved.</p>
     </section>
-    <section>
-      <h2>Open questions for client validation</h2>
-      <p>The following identify gaps in this draft. They are not a verbatim copy of the questions already emailed to the client.</p>
-      <ul>
-        <li>What is the current logo-to-CAD workflow, and which steps cause the most difficulty?</li>
-        <li>Which input and export formats are essential for the first version?</li>
-        <li>What sample logos and corresponding acceptable CAD outputs can be used for validation?</li>
-        <li>How should colors map to materials, and which adjustments must operators be able to make?</li>
-        <li>What geometric tolerances, minimum feature sizes, units, and scaling rules are required?</li>
-        <li>Which CAD/CAM tools must accept the exported files?</li>
-        <li>Which Windows versions and hardware must be supported?</li>
-        <li>What processing times, usability expectations, and acceptance tests define success?</li>
-        <li>What features are priorities, and what is outside the agreed project scope?</li>
-      </ul>
+    <section id="client-questions">
+      <h2>Questions sent to the client</h2>
+      <p>Jennifer Lee sent the following questions to Nick Dokich on behalf of COMP 523 Team E after the planned meetings could not take place. The exact send date is not recorded here. All answers remain pending as of September 20, 2026. Examples in the questions are possibilities for discussion, not agreed requirements.</p>
+      <ol>
+        <li><strong>Users and workflow</strong>
+          <p>Who do you expect to be the primary user of the tool?</p>
+          <p>What would their typical workflow look like from receiving a logo to exporting the final file?</p>
+        </li>
+        <li><strong>Core functionality and priorities</strong>
+          <p>What functionality would you consider absolutely necessary for the final product?</p>
+          <p>Which features would you consider must-haves versus nice-to-haves?</p>
+        </li>
+        <li><strong>Input files</strong>
+          <p>What types of input files do you most commonly receive from users?</p>
+        </li>
+        <li><strong>Color and vectorization behavior</strong>
+          <p>What should the program produce from each color in a logo?</p>
+          <p>For example, should every distinct color or material become its own separate closed vector path or layer?</p>
+        </li>
+        <li><strong>Editing capabilities</strong>
+          <p>What editing capabilities would you like after the initial vectorization?</p>
+          <p>For example, should users be able to merge colors, delete regions, adjust paths, change detected colors, or manually correct boundaries?</p>
+        </li>
+        <li><strong>SVG and DXF export requirements</strong>
+          <p>Are there specific requirements for the exported SVG or DXF files?</p>
+          <p>For example, are there requirements for DXF version, units, scale, layers, closed paths, naming conventions, or compatibility with software or machines you currently use?</p>
+        </li>
+        <li><strong>Performance and usability</strong>
+          <p>Are there any performance or usability expectations we should design around?</p>
+          <p>For example, how quickly should a typical logo be processed, and how much technical knowledge should we assume the user has?</p>
+        </li>
+        <li><strong>Technical constraints</strong>
+          <p>Are there any additional constraints we should be aware of?</p>
+          <p>We currently understand that the application should run locally on Windows and use an open-source stack. Should it also work completely offline? Are there any other restrictions related to installation, customer files, or external services?</p>
+        </li>
+        <li><strong>Difficult or invalid inputs</strong>
+          <p>How would you like the program to handle difficult or invalid inputs?</p>
+          <p>For example, very low-resolution images, gradients, photographs, logos with many colors, open contours, or files that cannot be converted cleanly.</p>
+        </li>
+        <li><strong>Success criteria</strong>
+          <p>At the end of the semester, what would make you consider the tool successful?</p>
+        </li>
+      </ol>
       <p>No numerical thresholds, performance promises, or final scope commitments are set in this draft.</p>
     </section>
     <section>
       <h2>Sources and review status</h2>
       <p>Source for the initial product description: the supplied Adcut project brief, <cite>dok-adcut.docx</cite>. Meeting and communication status: team update dated September 20, 2026.</p>
+      <p>Source for the client questions: Jennifer's email text supplied by the team. TA expectations were reviewed using the supplied <cite>COMP523_S26 (1).md</cite> notes, headed COMP 523/F26. Neither source supplies client answers or approval.</p>
       <p>The September 15 TA meeting covered expectations and <a href="https://hackmd.io/zci0WxDvSfC9OpvXnEK2Aw?view">this HackMD material</a>. It is linked for reference, not treated as client approval of the requirements.</p>
       <p>Next review: incorporate the client's answers when received and confirm scope and acceptance criteria with the client.</p>
     </section>
