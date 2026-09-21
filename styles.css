@@ -825,6 +825,17 @@ address a {
   font-size: 0.88rem;
 }
 
+.page-title {
+  font-size: 2.5rem;
+  overflow-wrap: anywhere;
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--unc-navy);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
 .spec-document {
   max-width: 900px;
   overflow-wrap: anywhere;
