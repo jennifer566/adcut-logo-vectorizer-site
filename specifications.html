@@ -3,112 +3,383 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Draft D1 specifications for Adcut Logo Vectorizer. Client confirmation is pending.">
-  <title>D1 Specifications Draft | Adcut Logo Vectorizer</title>
+  <meta name="description" content="D1 specifications for the Adcut Logo Vectorizer project.">
+  <title>D1 Specifications | Adcut Logo Vectorizer</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <header class="site-header">
-    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">A</span><span><strong>Adcut Logo Vectorizer</strong><small>UNC COMP 523</small></span></a>
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span>
+        <strong>Adcut Logo Vectorizer</strong>
+        <small>UNC COMP 523</small>
+      </span>
+    </a>
   </header>
+
   <main class="spec-document content-shell section-pad">
     <p><a href="deliverables.html">Back to project deliverables</a></p>
+
     <p class="eyebrow">D1 Specifications</p>
-    <h1>Specifications draft</h1>
-    <p><strong>Status: Draft - awaiting client confirmation.</strong><br>Last updated: <time datetime="2026-09-20">September 20, 2026</time></p>
-    <p>This document presents COMP 523 Team E's current understanding of the project and progress toward defining its requirements. It is a working draft for course progress review and client validation. Client meetings planned for September 15 and September 18 did not take place because of technical difficulties on the client's side. The team emailed requirements questions on September 18, 2026; no response has been received as of September 20, 2026. Detailed requirements, priorities, and acceptance criteria remain open.</p>
+    <h1>System Specifications</h1>
+
+    <p>
+      <strong>Status: Updated following client feedback.</strong><br>
+      Last updated:
+      <time datetime="2026-09-29">September 29, 2026</time>
+    </p>
+
+    <p>
+      This document describes the current specifications for the Adcut Logo
+      Vectorizer. The system is intended to help Adcut employees convert
+      customer-provided images into vector files that can be used as part of
+      the company's water jet cutting workflow. Requirements are prioritized
+      as definite, perhaps, or improbable based on their expected scope for
+      the semester.
+    </p>
 
     <section>
       <h2>Purpose and intended users</h2>
-      <p>The project brief describes a local Windows tool for Adcut that converts customer logos into 2D CAD drawings for water jet cutting. Different logo colors represent different flooring or turf materials, so color boundaries must become separate closed vector paths. Intended users identified in the brief are Adcut operators and CNC programmers.</p>
+
+      <p>
+        The primary users are Adcut owners and employees who prepare customer
+        artwork for water jet cutting, including operators and CNC programmers.
+        Customer artwork may arrive in several image formats and must be
+        converted into vector geometry before it can be used by the cutting
+        workflow.
+      </p>
+
+      <p>
+        Different color sections of a logo represent distinct regions that
+        should be traced separately, similar to a paint-by-numbers image. The
+        primary goal of the system is to allow an employee to upload an image,
+        automatically vectorize its regions, and export a usable DXF file.
+      </p>
     </section>
+
     <section>
-      <h2>Initial functional requirements</h2>
-      <p>The following are drawn from the project brief and remain subject to client validation:</p>
+      <h2>User stories</h2>
+
       <ul>
-        <li>Accept JPEG, PNG, WEBP, GIF, and PDF input.</li>
-        <li>Provide configurable color reduction to separate material regions.</li>
-        <li>Trace color boundaries into closed vector paths without gaps or overlaps.</li>
-        <li>Allow review and adjustment before export.</li>
-        <li>Export SVG and R12/R2000 DXF files.</li>
+        <li>
+          <strong>As an Adcut operator,</strong> I want to upload a
+          customer-provided image so that I can convert it into a vector file
+          for water jet cutting.
+        </li>
+
+        <li>
+          <strong>As an Adcut operator,</strong> I want the system to identify
+          the distinct color regions of an uploaded image and trace their
+          boundaries so that each region can be represented accurately as a
+          vector shape.
+        </li>
+
+        <li>
+          <strong>As a CNC programmer,</strong> I want to export the generated
+          vector paths as a CNC-compatible DXF file so that the file can be
+          loaded into the software used to operate the water jet machine.
+        </li>
+
+        <li>
+          <strong>As an Adcut operator,</strong> I want to preview and, when
+          possible, correct the generated vector paths before exporting so that
+          obvious conversion errors can be fixed without restarting the
+          process.
+        </li>
       </ul>
-      <p>Proposed workflow: upload image &rarr; color reduction &rarr; vectorization &rarr; review and tweak &rarr; SVG/DXF export.</p>
     </section>
+
     <section>
-      <h2>Initial non-functional requirements</h2>
+      <h2>Functional requirements</h2>
+
+      <h3>Definite</h3>
       <ul>
-        <li>Run locally on Windows.</li>
-        <li>Use an open-source, commercially viable stack.</li>
-        <li>Provide an intuitive interface for operators.</li>
+        <li>
+          <strong>Image Upload:</strong> The system shall allow users to upload
+          common image formats, including JPEG, PNG, WEBP, GIF, and PDF.
+        </li>
+
+        <li>
+          <strong>Color Reduction:</strong> The system shall allow the number
+          of colors or regions used during vectorization to be configured or
+          reduced.
+        </li>
+
+        <li>
+          <strong>Color Region Detection:</strong> The system shall identify
+          distinct color regions within an uploaded image.
+        </li>
+
+        <li>
+          <strong>Edge Tracing:</strong> The system shall generate vector paths
+          along the boundaries of detected color regions.
+        </li>
+
+        <li>
+          <strong>Adjacent Boundaries:</strong> Vector paths for adjacent
+          regions shall avoid unintended overlaps or gaps where possible.
+        </li>
+
+        <li>
+          <strong>DXF Export:</strong> The system shall generate a DXF file
+          that can be imported into the software used for Adcut's water jet
+          workflow.
+        </li>
+
+        <li>
+          <strong>SVG Export:</strong> The system shall support exporting the
+          generated vector representation as a standard SVG file.
+        </li>
       </ul>
-      <p>Supported Windows versions, hardware requirements, processing-time targets, accuracy tolerances, and measurable usability criteria have not been confirmed.</p>
-    </section>
-    <section>
-      <h2>Draft user stories</h2>
-      <p>These are team interpretations of the project brief, not statements collected from a client interview.</p>
+
+      <h3>Perhaps</h3>
       <ul>
-        <li>As an Adcut operator, I want to import customer artwork so that I can prepare it for CAD conversion.</li>
-        <li>As an Adcut operator, I want to reduce colors into material regions so that each region can be represented by closed paths.</li>
-        <li>As an Adcut operator, I want to review and adjust the traced result before exporting it.</li>
-        <li>As a CNC programmer, I want SVG or DXF output that can be used in the downstream cutting workflow.</li>
+        <li>
+          <strong>Vector Preview:</strong> The system may allow users to view
+          the generated vector paths before exporting them.
+        </li>
+
+        <li>
+          <strong>Color Configuration:</strong> The system may allow users to
+          adjust how detected colors are grouped before vectorization.
+        </li>
+
+        <li>
+          <strong>Input Validation:</strong> The system may detect images that
+          are difficult to vectorize, such as low-resolution images,
+          photographs, gradients, or images containing excessive numbers of
+          colors, and provide feedback to the user.
+        </li>
       </ul>
-      <p>Story priorities and acceptance criteria are pending client input.</p>
+
+      <h3>Improbable</h3>
+      <ul>
+        <li>
+          <strong>Manual Path Editing:</strong> The system may allow users to
+          manually move or correct generated vector boundaries.
+        </li>
+
+        <li>
+          <strong>Advanced Vector Editing:</strong> The system may allow users
+          to delete regions, merge regions, or directly modify individual
+          vector paths.
+        </li>
+
+        <li>
+          <strong>Integrated CAD Editing:</strong> The system may integrate an
+          open-source CAD or vector-editing tool for more advanced modification
+          of generated files.
+        </li>
+      </ul>
     </section>
+
     <section>
-      <h2>Interfaces and implementation options</h2>
-      <p>The brief proposes Streamlit or React/Vue for the interface, OpenCV for image processing, Potrace/vtracer for tracing, ezdxf for CAD export, and Docker/PyInstaller for development or packaging. These are candidate technologies, not final design decisions.</p>
-      <p>The downstream CAD/CAM software, required DXF entities, units and scale, layer conventions, and installation approach are not yet confirmed. No screen layout or detailed interface behavior has been approved.</p>
+      <h2>Non-functional requirements</h2>
+
+      <h3>Definite</h3>
+      <ul>
+        <li>
+          <strong>Windows Compatibility:</strong> The application shall run on
+          the Windows computers used by Adcut employees.
+        </li>
+
+        <li>
+          <strong>Open-Source Stack:</strong> The application shall be built
+          using open-source technologies that can be used commercially without
+          recurring licensing fees.
+        </li>
+
+        <li>
+          <strong>Ease of Use:</strong> The interface shall be usable by Adcut
+          employees without requiring software development knowledge.
+        </li>
+
+        <li>
+          <strong>Processing Time:</strong> A typical image shall be processed
+          in less than one hour.
+        </li>
+
+        <li>
+          <strong>CNC Compatibility:</strong> Generated DXF files shall use
+          vector geometry appropriate for CNC workflows, such as lines, arcs,
+          or polylines rather than unnecessarily complex spline geometry.
+        </li>
+      </ul>
+
+      <h3>Perhaps</h3>
+      <ul>
+        <li>
+          <strong>Local Operation:</strong> The application may perform the
+          entire vectorization process locally on the user's computer without
+          depending on a cloud service.
+        </li>
+
+        <li>
+          <strong>Installation:</strong> The application may be packaged so
+          that an Adcut employee can install and run it without manually
+          configuring development tools.
+        </li>
+      </ul>
+
+      <h3>Improbable</h3>
+      <ul>
+        <li>
+          <strong>Cloud Deployment:</strong> The system may additionally be
+          deployable as a hosted application if Adcut later determines that
+          cloud access would be useful.
+        </li>
+      </ul>
     </section>
-    <section id="client-questions">
-      <h2>Questions sent to the client</h2>
-      <p>The team emailed the following questions to the client on September 18, 2026, after the planned meetings could not take place. No response has been received as of September 20, 2026. Examples in the questions are possibilities for discussion, not agreed requirements.</p>
-      <ol>
-        <li><strong>Users and workflow</strong>
-          <p>Who do you expect to be the primary user of the tool?</p>
-          <p>What would their typical workflow look like from receiving a logo to exporting the final file?</p>
-        </li>
-        <li><strong>Core functionality and priorities</strong>
-          <p>What functionality would you consider absolutely necessary for the final product?</p>
-          <p>Which features would you consider must-haves versus nice-to-haves?</p>
-        </li>
-        <li><strong>Input files</strong>
-          <p>What types of input files do you most commonly receive from users?</p>
-        </li>
-        <li><strong>Color and vectorization behavior</strong>
-          <p>What should the program produce from each color in a logo?</p>
-          <p>For example, should every distinct color or material become its own separate closed vector path or layer?</p>
-        </li>
-        <li><strong>Editing capabilities</strong>
-          <p>What editing capabilities would you like after the initial vectorization?</p>
-          <p>For example, should users be able to merge colors, delete regions, adjust paths, change detected colors, or manually correct boundaries?</p>
-        </li>
-        <li><strong>SVG and DXF export requirements</strong>
-          <p>Are there specific requirements for the exported SVG or DXF files?</p>
-          <p>For example, are there requirements for DXF version, units, scale, layers, closed paths, naming conventions, or compatibility with software or machines you currently use?</p>
-        </li>
-        <li><strong>Performance and usability</strong>
-          <p>Are there any performance or usability expectations we should design around?</p>
-          <p>For example, how quickly should a typical logo be processed, and how much technical knowledge should we assume the user has?</p>
-        </li>
-        <li><strong>Technical constraints</strong>
-          <p>Are there any additional constraints we should be aware of?</p>
-          <p>We currently understand that the application should run locally on Windows and use an open-source stack. Should it also work completely offline? Are there any other restrictions related to installation, customer files, or external services?</p>
-        </li>
-        <li><strong>Difficult or invalid inputs</strong>
-          <p>How would you like the program to handle difficult or invalid inputs?</p>
-          <p>For example, very low-resolution images, gradients, photographs, logos with many colors, open contours, or files that cannot be converted cleanly.</p>
-        </li>
-        <li><strong>Success criteria</strong>
-          <p>At the end of the semester, what would make you consider the tool successful?</p>
-        </li>
-      </ol>
-      <p>No numerical thresholds, performance promises, or final scope commitments are set in this draft.</p>
-    </section>
+
     <section>
-      <h2>Next steps</h2>
-      <p>The team will incorporate the client's answers when received and confirm scope, priorities, and acceptance criteria with the client. Until then, the specifications remain provisional.</p>
+      <h2>Constraints and inverse requirements</h2>
+
+      <h3>Definite</h3>
+      <ul>
+        <li>
+          The core application shall not require paid or recurring software
+          licenses.
+        </li>
+
+        <li>
+          The system shall not require users to manually create vector geometry
+          in order to complete the basic image-to-DXF workflow.
+        </li>
+
+        <li>
+          Generated DXF files shall not depend on unnecessarily complex
+          geometry when simpler CNC-compatible lines, arcs, or polylines can
+          represent the same path.
+        </li>
+      </ul>
+
+      <h3>Perhaps</h3>
+      <ul>
+        <li>
+          When operating locally, customer image files should not need to be
+          uploaded to an external service.
+        </li>
+      </ul>
+
+      <h3>Improbable</h3>
+      <p>No additional constraints are currently identified at this priority.</p>
+    </section>
+
+    <section>
+      <h2>Interfaces</h2>
+
+      <h3>Definite</h3>
+      <ul>
+        <li>
+          <strong>Upload Interface:</strong> The application shall provide an
+          interface through which a user can select and upload an image.
+        </li>
+
+        <li>
+          <strong>Vectorization Controls:</strong> The application shall
+          provide controls for starting the conversion process and configuring
+          required options such as the desired number of colors.
+        </li>
+
+        <li>
+          <strong>Export Interface:</strong> The application shall provide a
+          way for users to export and save generated DXF and SVG files.
+        </li>
+
+        <li>
+          <strong>Water Jet Workflow Interface:</strong> The exported DXF
+          shall be compatible with the downstream software used to prepare
+          files for Adcut's water jet machine.
+        </li>
+      </ul>
+
+      <h3>Perhaps</h3>
+      <ul>
+        <li>
+          <strong>Preview Interface:</strong> The application may display the
+          generated vector paths before export.
+        </li>
+
+        <li>
+          <strong>Error and Warning Interface:</strong> The application may
+          inform users when an input image cannot be converted reliably and
+          explain the issue.
+        </li>
+      </ul>
+
+      <h3>Improbable</h3>
+      <ul>
+        <li>
+          <strong>Editing Interface:</strong> The application may provide
+          interactive controls for selecting, moving, deleting, merging, or
+          otherwise modifying generated vector regions.
+        </li>
+
+        <li>
+          <strong>External CAD Interface:</strong> The application may connect
+          to or embed an open-source CAD application for detailed path editing.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Expected workflow</h2>
+
+      <p>
+        The expected core workflow is:
+        <strong>
+          upload image &rarr; identify and reduce color regions &rarr; trace
+          vector boundaries &rarr; optionally preview the result &rarr; export
+          SVG or DXF.
+        </strong>
+      </p>
+
+      <p>
+        The minimum successful semester deliverable is a system that allows an
+        Adcut employee to upload an image, convert it into vector geometry, and
+        download a DXF file that can successfully be used in Adcut's existing
+        water jet workflow.
+      </p>
+    </section>
+
+    <section>
+      <h2>Open questions</h2>
+
+      <p>
+        Some implementation details still require further validation or testing
+        with Adcut, including:
+      </p>
+
+      <ul>
+        <li>
+          The exact DXF version, units, scale, layer conventions, and other
+          requirements of the downstream CAD/CAM software.
+        </li>
+
+        <li>
+          The types and quality of customer images most commonly received by
+          Adcut.
+        </li>
+
+        <li>
+          The desired behavior when an image cannot be vectorized cleanly.
+        </li>
+
+        <li>
+          Which editing capabilities, if any, are practical within the
+          semester's scope.
+        </li>
+      </ul>
     </section>
   </main>
-  <footer class="site-footer"><div class="content-shell footer-inner"><p>Adcut Logo Vectorizer, UNC COMP 523</p><a href="index.html">Project website</a></div></footer>
+
+  <footer class="site-footer">
+    <div class="content-shell footer-inner">
+      <p>Adcut Logo Vectorizer, UNC COMP 523</p>
+      <a href="index.html">Project website</a>
+    </div>
+  </footer>
 </body>
 </html>
