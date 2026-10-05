@@ -84,11 +84,11 @@
       <ul>
         <li>Python 3.11 and Streamlit provide the initial local Windows application.</li>
         <li>OpenCV and NumPy support color and contour processing.</li>
-        <li>Pillow handles raster image decoding; pypdfium2 is planned for later PDF input.</li>
+        <li>Pillow handles raster image decoding; pypdfium2 renders the first PDF page in the current build.</li>
         <li>ezdxf provides DXF serialization using native CAD entities where possible.</li>
         <li>pytest, Ruff, pre-commit, and Windows continuous integration provide development checks.</li>
       </ul>
-      <p>The current development foundation exports native circle entities and has seven passing automated tests. Image-to-DXF processing, shared-boundary construction, curve fitting, and downstream acceptance testing remain implementation work.</p>
+      <p>The current development build accepts JPEG, PNG, WEBP, GIF, and PDF inputs; performs color reduction and contour tracing; previews detected boundaries; and exports closed color-region paths to SVG and DXF. The repository includes three original test images, fourteen passing automated tests, and passing formatting and Windows continuous-integration checks. Native circle and arc fitting, shared-boundary deduplication, manual editing, and downstream acceptance testing remain implementation work.</p>
     </section>
 
     <section id="open-decisions">
