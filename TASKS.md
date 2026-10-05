@@ -6,8 +6,8 @@
 - [x] Preserve team edits and incorporate initial and follow-up client feedback.
 - [x] Correct stale current-status text, output preferences, color/material description, optional editing, and broken question anchors.
 - [x] Select and document the starting platform, alternatives, and tradeoffs.
-- [x] Create architecture, UI mockup, and system metaphor drafts.
-- [x] Create an editable eight-slide PowerPoint with speaker notes and timing guidance.
+- [x] Publish the midterm architecture diagram, UI mockup, system metaphor, and technical design baseline with contracts, geometry invariants, interaction states, and validation strategy.
+- [x] Publish the editable eight-slide PowerPoint with a full speaking script, suggested four-person allocation, timing guidance, and Q&A notes.
 - [x] Create a separate private development repository with a native-circle exporter, seven tests, Windows CI, formatting and commit hooks, setup instructions, and implementation backlog.
 
 ## Human tasks before October 5 class

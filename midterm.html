@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Midterm Preparation | Adcut Logo Vectorizer</title><link rel="stylesheet" href="styles.css"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Midterm Materials | Adcut Logo Vectorizer</title><link rel="stylesheet" href="styles.css"></head>
 <body>
   <header class="site-header" data-header>
     <a class="brand" href="index.html#top" aria-label="Adcut Logo Vectorizer home">
@@ -25,11 +25,12 @@
 <main class="spec-document content-shell section-pad" id="top">
 <p><a href="deliverables.html">Back to deliverables</a></p>
 <p class="eyebrow">Team E / October 4, 2026</p>
-<h1>Midterm preparation</h1>
+<h1>Midterm materials</h1>
 <p><strong>All teams must be ready October 5 at class time.</strong> Presentation sessions are October 5, 7, and 12, in random order. All students attend all sessions. The 10-12 minute slot includes questions and transitions. No application demo is required.</p>
-<p><a href="assets/adcut-midterm-draft.pptx">Download the eight-slide PowerPoint draft</a> &middot; <a href="#checklist">Course checklist</a> &middot; <a href="#platform">Platform</a> &middot; <a href="#architecture">Architecture</a> &middot; <a href="#mockup">UI mockup</a></p>
-<p>The deck and design materials need team review and revision before presentation. They describe intended behavior, not a completed converter or validated cutting output.</p>
-<section id="checklist">
+<p><a href="assets/adcut-midterm.pptx">Download the eight-slide PowerPoint</a> &middot; <a href="assets/midterm-speaking-notes.md">Full speaking notes and Q&amp;A</a> &middot; <a href="assets/technical-design.md">Technical design document</a></p>
+<p><a href="specifications.html">Specifications</a> &middot; <a href="#platform">Platform decision</a> &middot; <a href="#architecture">Architecture</a> &middot; <a href="#metaphor">System metaphor</a> &middot; <a href="#mockup">UI mockup</a></p>
+<p>The presentation includes all five required content areas and full speaker notes. The design describes intended behavior; the current implementation is a tested DXF export foundation. Team review, rehearsal, and instructor submission must occur separately.</p>
+<details id="checklist"><summary>Course deadlines and submission status</summary>
 <h2>Course checklist as of October 4</h2>
 <table class="course-checklist"><thead><tr><th>Requirement</th><th>Course timing</th><th>Current status / remaining task</th></tr></thead><tbody>
 <tr><td>Website and URL submission</td><td>End of week of Aug. 24; repeated Sept. 2</td><td>Website published. Team must verify URL email and instructor access.</td></tr>
@@ -37,12 +38,12 @@
 <tr><td>Specifications</td><td>End of week of Sept. 14</td><td><a href="specifications.html">Published and updated Oct. 4</a>. Detailed Adcut validation remains open.</td></tr>
 <tr><td>Platform selection</td><td>End of week of Sept. 21</td><td>Starting platform documented Oct. 4 below. Installation and full application development remain.</td></tr>
 <tr><td>Tech-talk topic email</td><td>End of week of Sept. 21</td><td>Submission unverified. Proposed topic: native CAD curves versus segmented raster tracing. Team must agree and email the instructor.</td></tr>
-<tr><td>Architecture and system metaphor</td><td>End of week of Sept. 28</td><td>Drafts published Oct. 4 below. Team review remains.</td></tr>
-<tr><td>Midterm PowerPoint</td><td>Ready Oct. 5 at class time</td><td>Eight-slide draft linked. All four members must revise, assign speaking parts, and rehearse.</td></tr>
+<tr><td>Architecture and system metaphor</td><td>End of week of Sept. 28</td><td>Midterm design baseline published Oct. 4, including component contracts and validation strategy.</td></tr>
+<tr><td>Midterm PowerPoint</td><td>Ready Oct. 5 at class time</td><td>Eight-slide presentation with full speaking notes published. Team review and rehearsal remain.</td></tr>
 <tr><td>Ethics assignment</td><td>End of week of Oct. 19</td><td>Upcoming. Review the assignment and agree a team work plan.</td></tr>
 </tbody></table>
 <p>Dates follow the Fall 2026 section of the <a href="https://www.cs.unc.edu/~stotts/COMP523-F26/calendar.html">course calendar</a>. End-of-week entries do not specify an exact hour. Older semester material on that page is not used here.</p>
-</section>
+</details>
 <section id="platform">
 <h2>Selected starting platform</h2>
 <p>Selected October 4 for initial implementation: Python 3.11, Streamlit, OpenCV, NumPy, Pillow, ezdxf, and pypdfium2 for later PDF import. Development uses VS Code and GitHub, with pytest, Ruff, and pre-commit. Target: Windows with a local browser interface. Hardware requirements will be measured against representative artwork.</p>
@@ -52,9 +53,10 @@
 <p><a href="https://github.com/jennifer566/adcut-logo-vectorizer">Development repository</a> (private; access required). The foundation contains a native-circle DXF exporter and tests. Image-to-DXF conversion is not yet implemented.</p>
 </section>
 <section id="architecture">
-<h2>Architecture draft</h2>
+<h2>System architecture</h2>
 <img class="document-figure" src="assets/midterm-slide-6.png" alt="Proposed architecture: Streamlit interface, input adapters, processing and geometry, CAD export, then external AutoCAD or IGEMS validation." width="1280" height="720">
 <p>The interface passes source files and explicit scale settings to input adapters. Processing identifies regions and constructs shared boundaries, then fits supported geometry. Export serializes the geometry into CAD files. AutoCAD/IGEMS import and Adcut acceptance are external validation steps, not implemented integrations. Native-circle export has a test fixture; arc fitting and shared-boundary tracing remain to be developed.</p>
+<p>The <a href="assets/technical-design.md">technical design document</a> defines component inputs and outputs, region topology, coordinate transforms, UI states, input policies, test cases, and unresolved client decisions. Shared-edge references preserve adjacency internally; the downstream convention for separate closed regions versus deduplicated cut edges still needs confirmation.</p>
 </section>
 <section id="metaphor">
 <h2>System metaphor: a digital stencil workshop</h2>
@@ -64,12 +66,14 @@
 <h2>User interface mockup</h2>
 <img class="document-figure" src="assets/midterm-slide-4.png" alt="Proposed interface showing image selection, output width and units, color count, an optional preview area, Convert, and Download DXF." width="1280" height="720">
 <p>Static design draft. Exact controls and optional preview remain subject to sample-driven validation. The scale field must represent an explicit output dimension; it must not be guessed from pixel count.</p>
+<h3>Interaction states</h3>
+<p><strong>Ready:</strong> choose artwork and enter a physical width and units. <strong>Processing:</strong> report the active stage and prevent duplicate requests. <strong>Needs correction:</strong> identify invalid inputs or geometry issues and preserve settings. <strong>Complete:</strong> provide the export with any warnings. Changing the input or settings invalidates the previous download.</p>
 </section>
 <section id="rehearsal">
 <h2>Before class</h2>
 <ol>
 <li>All four members review and revise the slides and confirm they can explain the selected platform and proposed architecture.</li>
-<li>Assign two slides to each member as a starting split. Speaker notes suggest roughly 8 minutes 20 seconds total, leaving questions and transition time within the 10-12 minute slot.</li>
+<li>Confirm the suggested speaking split: Jennifer, slides 1-2; Hamsini, slides 3-4; Vibhas, slides 5-6; Alex, slides 7-8. Full speaker notes target 8 minutes 20 seconds, leaving questions and transition time within the 10-12 minute slot.</li>
 <li>Perform a timed run-through together and adjust the split. The course page's per-person estimate does not fit four speakers in the total slot; follow the total limit and ask the instructor if clarification is needed.</li>
 <li>Download and open the PowerPoint on the presenting computer; verify the display connection or podium access.</li>
 <li>Confirm or submit the tech-talk topic and website URL to the instructor. No email has been sent by this update.</li>
