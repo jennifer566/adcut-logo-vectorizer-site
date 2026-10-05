@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="D2 design document for the Adcut Logo Vectorizer, including the system architecture and system metaphor.">
+  <title>D2 Design Document | Adcut Logo Vectorizer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header" data-header>
+    <a class="brand" href="index.html#top" aria-label="Adcut Logo Vectorizer home">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span>
+        <strong>Adcut Logo Vectorizer</strong>
+        <small>UNC COMP 523</small>
+      </span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="site-nav" aria-label="Main navigation" data-nav>
+      <a href="index.html">Home</a>
+      <a href="meetings.html">Meetings</a>
+      <a href="deliverables.html" aria-current="location">Deliverables</a>
+      <a class="nav-cta" href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="spec-document content-shell section-pad" id="top">
+    <p><a href="deliverables.html">Back to deliverables</a></p>
+    <p class="eyebrow">D2 / Design Document</p>
+    <h1>Architecture and system metaphor</h1>
+    <p>This document records Team E's current design for the Adcut Logo Vectorizer. It describes the planned software structure and the shared metaphor guiding implementation. Client-specific export conventions and acceptance tolerances remain open until the team receives representative files and downstream requirements.</p>
+
+    <section id="architecture">
+      <h2>System architecture</h2>
+      <img class="document-figure" src="assets/design-architecture.png" alt="Proposed architecture with interface, input, region processing, geometry, export, and external acceptance stages." width="1280" height="720">
+      <p>The design separates the user interface from image processing, geometry construction, validation, and export. This separation allows the processing and export logic to be tested without running the browser interface.</p>
+
+      <h3>Component responsibilities</h3>
+      <table class="course-checklist">
+        <thead>
+          <tr><th>Component</th><th>Responsibility</th><th>Planned technology</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Interface</td><td>Accept artwork and scale settings, report progress and warnings, and provide the matching download.</td><td>Streamlit</td></tr>
+          <tr><td>Input adapters</td><td>Decode supported images and retain source metadata. PDF page or region selection remains a later design decision.</td><td>Pillow and pypdfium2</td></tr>
+          <tr><td>Region processing</td><td>Reduce colors, identify distinct regions, and preserve holes and adjacency.</td><td>OpenCV and NumPy</td></tr>
+          <tr><td>Geometry</td><td>Construct closed boundaries, manage shared edges, fit suitable lines, circles, and arcs, and apply physical scale.</td><td>Python geometry modules</td></tr>
+          <tr><td>Validation and export</td><td>Reject invalid or degenerate geometry and serialize supported CAD entities.</td><td>ezdxf</td></tr>
+          <tr><td>External acceptance</td><td>Confirm that exported files import correctly and work in Adcut's downstream process.</td><td>AutoCAD, IGEMS, and client review</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="data-flow">
+      <h2>Data flow and design boundaries</h2>
+      <ol>
+        <li>The employee selects customer artwork and enters an explicit physical output dimension and units.</li>
+        <li>The input adapter converts the selected file into a consistent image representation.</li>
+        <li>Processing creates distinct color regions without merging colors solely because they use the same material.</li>
+        <li>The geometry stage creates closed boundaries, retains holes and adjacency, and fits native curves where supported.</li>
+        <li>Validation checks closure, finite coordinates, degenerate entities, scale, and unintended duplicate boundaries.</li>
+        <li>The export adapter creates a DXF for downstream CAD review. AutoCAD, IGEMS, and the water jet workflow remain outside the application.</li>
+      </ol>
+      <p>DXF is the initial output target. R2000 is only a development default, not a confirmed client requirement. Native DWG export requires a separate feasibility and licensing review. SVG remains a possible fallback.</p>
+    </section>
+
+    <section id="metaphor">
+      <h2>System metaphor: a digital stencil workshop</h2>
+      <img class="document-figure" src="assets/design-system-metaphor.png" alt="Representative illustration of separate colored stencil pieces assembling into one design." width="1280" height="720">
+      <p>The artwork is the pattern. Each distinct color region becomes a stencil piece. Tracing defines the edge of each piece, curve fitting improves that edge for CAD use, and DXF packages the pieces for downstream preparation.</p>
+      <p>The metaphor gives the team a consistent vocabulary while preserving the system boundary: the application prepares geometry, but it does not operate the water jet or reconstruct details missing from low-quality artwork. Neighboring stencil pieces also help the team reason about shared boundaries so the design does not create unintended duplicate cuts.</p>
+    </section>
+
+    <section id="decisions">
+      <h2>Current design decisions</h2>
+      <ul>
+        <li>Python 3.11 and Streamlit provide the initial local Windows application.</li>
+        <li>OpenCV and NumPy support color and contour processing.</li>
+        <li>Pillow handles raster image decoding; pypdfium2 is planned for later PDF input.</li>
+        <li>ezdxf provides DXF serialization using native CAD entities where possible.</li>
+        <li>pytest, Ruff, pre-commit, and Windows continuous integration provide development checks.</li>
+      </ul>
+      <p>The current development foundation exports native circle entities and has seven passing automated tests. Image-to-DXF processing, shared-boundary construction, curve fitting, and downstream acceptance testing remain implementation work.</p>
+    </section>
+
+    <section id="open-decisions">
+      <h2>Open decisions requiring evidence</h2>
+      <p>The team still needs permitted sample artwork, accepted CAD examples, target software versions, units, scale conventions, layers, DXF version, supported entities, and agreed error tolerances. These items are intentionally not presented as approved requirements.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="content-shell footer-inner">
+      <p>Adcut Logo Vectorizer, UNC COMP 523</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
