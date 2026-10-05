@@ -38,7 +38,7 @@
         <div class="hero-copy">
           <p class="eyebrow">Open-source CAD preparation for water jet cutting</p>
           <h1>Adcut Logo Vectorizer</h1>
-          <p class="hero-lede">A local Windows application that turns customer logo artwork into clean, material-aware 2D CAD drawings ready for flooring and turf fabrication.</p>
+          <p class="hero-lede">A project to help Adcut employees upload customer artwork and export vector files for water jet cutting. Initial client feedback is received; implementation and CAD compatibility still need validation.</p>
           <div class="hero-actions" aria-label="Primary page actions">
             <a class="button primary" href="#contact">Contact Team</a>
             <a class="button secondary" href="deliverables.html">View Deliverables</a>
@@ -50,11 +50,11 @@
             </div>
             <div>
               <dt>Outputs</dt>
-              <dd>SVG, R12/R2000 DXF</dd>
+              <dd>DXF priority; DWG requested; SVG fallback</dd>
             </div>
             <div>
               <dt>Platform</dt>
-              <dd>Local Windows tool</dd>
+              <dd>Python / Streamlit, local Windows first</dd>
             </div>
           </dl>
         </div>
@@ -91,8 +91,8 @@
           <h2>From customer artwork to cut-ready geometry.</h2>
         </div>
         <div class="copy-block">
-          <p>Adcut needs a dependable local tool for converting customer logos into 2D CAD drawings used in water jet cutting. The key challenge is preserving color boundaries as separate, closed vector paths because each logo color represents a different flooring or turf material.</p>
-          <p>The target users are internal Adcut operators and CNC programmers who prepare files for water jet cutting. The project focuses on an open-source stack that can run on Windows without cloud processing, while still giving operators enough review and adjustment controls before export.</p>
+          <p>Adcut needs a dependable local tool for converting customer logos into 2D CAD drawings used in water jet cutting. The key challenge is preserving color boundaries as separate, closed vector paths because each distinct color section needs its own geometry, even when the material is the same.</p>
+          <p>The target users are Adcut owners and employees preparing artwork for water jet cutting. Upload, vectorization, and usable DXF export are the core priorities. Preview and editing are optional; local versus cloud deployment remains open.</p>
         </div>
       </div>
     </section>
@@ -152,13 +152,13 @@
           </article>
           <article class="workflow-step">
             <span>04</span>
-            <h3>Review and Tweak</h3>
-            <p>Let users inspect boundaries, adjust simplification, and confirm that paths are watertight.</p>
+            <h3>Optional Review</h3>
+            <p>Preview is a nice-to-have. Manual boundary correction and path adjustment remain subject to feasibility and team scope decisions.</p>
           </article>
           <article class="workflow-step">
             <span>05</span>
             <h3>Export</h3>
-            <p>Produce SVG and DXF files, including R12/R2000 DXF compatibility targets.</p>
+            <p>Prioritize DXF for AutoCAD or IGEMS. DWG is also requested; SVG is a fallback. Exact format versions and units need confirmation.</p>
           </article>
         </div>
       </div>
@@ -170,10 +170,11 @@
           <p class="eyebrow">Technical Design</p>
           <h2>An open-source local pipeline built for operator control.</h2>
         </div>
+        <p>Starting platform selected October 4: Python 3.11, Streamlit, OpenCV, and ezdxf on Windows. See the <a href="midterm.html#platform">platform selection and alternatives</a>. The full converter is not yet implemented.</p>
         <div class="tech-layout">
           <article class="tech-panel large">
-            <h3>Proposed Application Layer</h3>
-            <p>Streamlit provides a fast Python-first path for a local prototype, while React or Vue can support a more customized desktop-style interface if the project shifts toward a richer front end.</p>
+            <h3>Application Layer</h3>
+            <p>Streamlit provides the selected local browser interface with a Python processing pipeline. React/Vue were considered for richer editing but would add a separate frontend and API.</p>
           </article>
           <article class="tech-panel">
             <h3>Image Processing</h3>
@@ -181,7 +182,7 @@
           </article>
           <article class="tech-panel">
             <h3>Vector Tracing</h3>
-            <p>Potrace or vtracer can convert separated regions into smooth vector paths for each material color.</p>
+            <p>OpenCV contours provide the starting geometry. Circle and arc fitting, shared boundaries, and tolerances require implementation and validation. Potrace/vtracer remain comparison options.</p>
           </article>
           <article class="tech-panel">
             <h3>CAD Export</h3>
@@ -189,7 +190,7 @@
           </article>
           <article class="tech-panel">
             <h3>Packaging</h3>
-            <p>Docker can stabilize development environments; PyInstaller can package a Windows-friendly local tool.</p>
+            <p>Begin with a Python virtual environment on Windows. Evaluate PyInstaller packaging after the core workflow is reliable; cloud hosting remains an option.</p>
           </article>
         </div>
       </div>
@@ -200,8 +201,8 @@
         <div class="section-heading">
           <p class="eyebrow">Specifications</p>
           <h2>Initial functional and non-functional requirements.</h2>
-          <p><strong>Draft - awaiting client confirmation.</strong> These initial requirements come from the project brief and have not yet been validated in a client meeting. As of September 20, 2026, the client has not responded to the questions sent by the team.</p>
-          <p><a href="specifications.html">Read the D1 specifications draft and open questions</a></p>
+          <p><strong>Draft - feedback incorporated; details pending.</strong> Initial feedback is received. The October 4 specifications update includes CAD output preferences, curve quality, and remaining questions for Adcut.</p>
+          <p><a href="specifications.html">Read the updated D1 specifications and open questions</a></p>
         </div>
         <div class="requirements-grid">
           <article>
@@ -210,14 +211,14 @@
               <li>Accept JPEG, PNG, WEBP, GIF, and PDF artwork files.</li>
               <li>Allow configurable color reduction to match logo colors to material zones.</li>
               <li>Generate accurate closed paths along color boundaries without gaps or overlaps.</li>
-              <li>Export standard SVG and R12/R2000 compliant DXF files for CNC preparation.</li>
+              <li>Prioritize DXF export, assess DWG feasibility, and retain SVG as a fallback; confirm downstream compatibility.</li>
             </ul>
           </article>
           <article>
             <h3>Non-Functional Requirements</h3>
             <ul>
               <li>Run locally on an operator's Windows machine.</li>
-              <li>Confirm with the client whether fully offline operation and restrictions on external services are required.</li>
+              <li>Evaluate local and cloud deployment; the client has left both open for discussion.</li>
               <li>Use open-source, commercially viable tools with no recurring licensing fees.</li>
               <li>Provide a straightforward interface for non-software engineers.</li>
             </ul>
@@ -287,6 +288,8 @@
           <a href="https://www.cs.unc.edu/~stotts/COMP523-F26/deliverables.html">COMP 523 deliverables</a>
           <a href="https://www.cs.unc.edu/~stotts/COMP523-F26/funcSpec.html">COMP 523 specifications guide</a>
           <a href="https://github.com/jennifer566/adcut-logo-vectorizer-site">Project website repository</a>
+          <a href="https://adcut.net/">Adcut products and services</a>
+          <a href="https://vectable.ai/">Vectable (client-suggested reference)</a>
           <a href="https://opencv.org/">OpenCV</a>
           <a href="https://ezdxf.readthedocs.io/">ezdxf</a>
         </div>

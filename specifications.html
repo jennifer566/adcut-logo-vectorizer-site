@@ -26,9 +26,9 @@
     <h1>System Specifications</h1>
 
     <p>
-      <strong>Status: Updated following client feedback.</strong><br>
+      <strong>Status: Initial and follow-up feedback incorporated; detailed validation pending.</strong><br>
       Last updated:
-      <time datetime="2026-09-29">September 29, 2026</time>
+      <time datetime="2026-10-04">October 4, 2026</time>
     </p>
 
     <p>
@@ -37,7 +37,7 @@
       customer-provided images into vector files that can be used as part of
       the company's water jet cutting workflow. Requirements are prioritized
       as definite, perhaps, or improbable based on their expected scope for
-      the semester.
+      the semester. These priority labels are provisional team planning categories, not client approval of every item. Nick has forwarded the questions to Adcut for more detailed answers.
     </p>
 
     <section>
@@ -53,7 +53,7 @@
 
       <p>
         Different color sections of a logo represent distinct regions that
-        should be traced separately, similar to a paint-by-numbers image. The
+        should be traced separately, similar to a paint-by-numbers image. The material may be the same across those sections. The
         primary goal of the system is to allow an employee to upload an image,
         automatically vectorize its regions, and export a usable DXF file.
       </p>
@@ -98,7 +98,7 @@
       <ul>
         <li>
           <strong>Image Upload:</strong> The system shall allow users to upload
-          common image formats, including JPEG, PNG, WEBP, GIF, and PDF.
+          common image formats. JPEG and PNG are examples mentioned in the response; WEBP, GIF, and PDF remain planned coverage from the brief, with exact supported cases to validate using samples.
         </li>
 
         <li>
@@ -130,7 +130,7 @@
 
         <li>
           <strong>SVG Export:</strong> The system shall support exporting the
-          generated vector representation as a standard SVG file.
+          generated vector representation as a standard SVG fallback. DXF is the primary success criterion; DWG is also requested but requires a feasibility decision.
         </li>
       </ul>
 
@@ -197,8 +197,7 @@
         </li>
 
         <li>
-          <strong>Processing Time:</strong> A typical image shall be processed
-          in less than one hour.
+          <strong>Processing Time:</strong> The client expressed a rough expectation of less than one hour and said employees can be trained. Representative file sizes, hardware, and a measurable performance target remain to be agreed.
         </li>
 
         <li>
@@ -226,9 +225,7 @@
       <h3>Improbable</h3>
       <ul>
         <li>
-          <strong>Cloud Deployment:</strong> The system may additionally be
-          deployable as a hosted application if Adcut later determines that
-          cloud access would be useful.
+          <strong>Cloud Deployment:</strong> The client permits discussion of cloud hosting. Its placement in this provisional scope category is not a client restriction; the team must decide between local and hosted operation.
         </li>
       </ul>
     </section>
@@ -344,7 +341,18 @@
       </p>
     </section>
 
-    <section>
+    <section id="client-feedback">
+      <h2>Follow-up CAD and geometry requirements</h2>
+      <ul>
+        <li><strong>Circles and arcs:</strong> Nick reports that Vectable produces too many short segments for circles, reducing cut quality. Evaluate native circular arcs and circles rather than thousands of tiny lines. Confirm supported entities and fitting tolerances with Adcut.</li>
+        <li><strong>Output compatibility:</strong> AutoCAD and IGEMS are reported downstream tools. DXF and DWG are preferred; SVG is a fallback. Native DWG generation is a feasibility question, not an implemented feature.</li>
+        <li><strong>Partial drawings:</strong> Selecting only part of a PDF floor plan is a proposed enhancement. Confirm whether supplied PDFs contain vector geometry or raster images before choosing an approach.</li>
+        <li><strong>Scaling quality:</strong> Small, blurry logos may need substantial enlargement. Validate geometry at the intended output scale and avoid unintended stroke thickness or doubled contours. Recovery of missing image detail is not guaranteed.</li>
+        <li><strong>Priority:</strong> Upload, vectorization, and a DXF that works in the existing cutting workflow are core. Preview is optional; manual editing, crop selection, and DWG support need scope and feasibility decisions.</li>
+      </ul>
+    </section>
+
+    <section id="client-questions">
       <h2>Open questions</h2>
 
       <p>
@@ -353,6 +361,10 @@
       </p>
 
       <ul>
+        <li>Sample source files and matching acceptable CAD output from Adcut.</li>
+        <li>Supported arc/circle entities, fitting tolerances, minimum segment length, scale and boundary interpretation in AutoCAD/IGEMS.</li>
+        <li>Whether DWG output is mandatory and how it can be produced within the chosen licensing and deployment approach.</li>
+        <li>Whether partial PDF selection belongs in the semester's agreed scope.</li>
         <li>
           The exact DXF version, units, scale, layer conventions, and other
           requirements of the downstream CAD/CAM software.

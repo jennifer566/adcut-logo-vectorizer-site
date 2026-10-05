@@ -858,6 +858,33 @@ address a {
   margin-top: 8px;
 }
 
+.document-figure {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.course-checklist {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.94rem;
+}
+
+.course-checklist th,
+.course-checklist td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.course-checklist th {
+  color: var(--white);
+  background: var(--unc-navy);
+}
+
 .site-footer {
   color: #6d7b8f;
   background: #071a33;
