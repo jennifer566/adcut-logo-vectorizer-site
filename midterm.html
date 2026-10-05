@@ -27,9 +27,9 @@
 <p class="eyebrow">Team E / October 4, 2026</p>
 <h1>Midterm materials</h1>
 <p><strong>All teams must be ready October 5 at class time.</strong> Presentation sessions are October 5, 7, and 12, in random order. All students attend all sessions. The 10-12 minute slot includes questions and transitions. No application demo is required.</p>
-<p><a href="assets/adcut-midterm.pptx">Download the eight-slide PowerPoint</a> &middot; <a href="assets/midterm-speaking-notes.md">Full speaking notes and Q&amp;A</a> &middot; <a href="assets/technical-design.md">Technical design document</a></p>
+<p><a href="assets/adcut-midterm-v2.pptx">Download the visual eight-slide PowerPoint</a> &middot; <a href="assets/midterm-speaking-notes.md">Exact slide-by-slide script and Q&amp;A</a> &middot; <a href="assets/technical-design.md">Technical design document</a></p>
 <p><a href="specifications.html">Specifications</a> &middot; <a href="#platform">Platform decision</a> &middot; <a href="#architecture">Architecture</a> &middot; <a href="#metaphor">System metaphor</a> &middot; <a href="#mockup">UI mockup</a></p>
-<p>The presentation includes all five required content areas and full speaker notes. The design describes intended behavior; the current implementation is a tested DXF export foundation. Team review, rehearsal, and instructor submission must occur separately.</p>
+<p>The presentation includes all five required content areas, four subject-specific visuals, editable interface and architecture diagrams, and a complete word-for-word script in the speaker notes. Generated images are representative illustrations, not photographs of Adcut's equipment or output. The current implementation is a tested DXF export foundation. Team review, rehearsal, and instructor submission must occur separately.</p>
 <details id="checklist"><summary>Course deadlines and submission status</summary>
 <h2>Course checklist as of October 4</h2>
 <table class="course-checklist"><thead><tr><th>Requirement</th><th>Course timing</th><th>Current status / remaining task</th></tr></thead><tbody>
@@ -54,7 +54,7 @@
 </section>
 <section id="architecture">
 <h2>System architecture</h2>
-<img class="document-figure" src="assets/midterm-slide-6.png" alt="Proposed architecture: Streamlit interface, input adapters, processing and geometry, CAD export, then external AutoCAD or IGEMS validation." width="1280" height="720">
+<img class="document-figure" src="assets/midterm-slide-6-v2.png" alt="Proposed architecture: Streamlit interface, input adapters, region processing, geometry fitting, DXF export, then external AutoCAD or IGEMS validation." width="1280" height="720">
 <p>The interface passes source files and explicit scale settings to input adapters. Processing identifies regions and constructs shared boundaries, then fits supported geometry. Export serializes the geometry into CAD files. AutoCAD/IGEMS import and Adcut acceptance are external validation steps, not implemented integrations. Native-circle export has a test fixture; arc fitting and shared-boundary tracing remain to be developed.</p>
 <p>The <a href="assets/technical-design.md">technical design document</a> defines component inputs and outputs, region topology, coordinate transforms, UI states, input policies, test cases, and unresolved client decisions. Shared-edge references preserve adjacency internally; the downstream convention for separate closed regions versus deduplicated cut edges still needs confirmation.</p>
 </section>
@@ -64,7 +64,7 @@
 </section>
 <section id="mockup">
 <h2>User interface mockup</h2>
-<img class="document-figure" src="assets/midterm-slide-4.png" alt="Proposed interface showing image selection, output width and units, color count, an optional preview area, Convert, and Download DXF." width="1280" height="720">
+<img class="document-figure" src="assets/midterm-slide-4-v2.png" alt="Proposed interface showing image selection, output width and units, automatic color regions, a preview and validation area, Convert, and Download DXF." width="1280" height="720">
 <p>Static design draft. Exact controls and optional preview remain subject to sample-driven validation. The scale field must represent an explicit output dimension; it must not be guessed from pixel count.</p>
 <h3>Interaction states</h3>
 <p><strong>Ready:</strong> choose artwork and enter a physical width and units. <strong>Processing:</strong> report the active stage and prevent duplicate requests. <strong>Needs correction:</strong> identify invalid inputs or geometry issues and preserve settings. <strong>Complete:</strong> provide the export with any warnings. Changing the input or settings invalidates the previous download.</p>

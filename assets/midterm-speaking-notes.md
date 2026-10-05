@@ -1,51 +1,69 @@
-# Adcut Logo Vectorizer: midterm speaking notes
+# Adcut Logo Vectorizer: exact midterm script
 
-UNC COMP 523, Team E. Prepared October 4, 2026 for October 5 readiness.
+UNC COMP 523, Team E. Prepared October 4, 2026.
 
-Suggested speaking allocation, subject to the team's confirmation: Jennifer slides 1-2; Hamsini slides 3-4; Vibhas slides 5-6; Alex slides 7-8. Target speaking time is 8 minutes 20 seconds. Rehearse aloud and adjust pacing to leave room for questions and transitions in the 10-12 minute slot. These are speaking notes, not a record of rehearsal or team approval.
+This script is written word for word for the eight-slide presentation. At a normal speaking pace it targets about eight minutes and twenty seconds, leaving time for questions and transition inside the ten-to-twelve-minute slot.
 
-## 1. Introduction (40 seconds)
+Suggested speaker assignment: Jennifer, slides 1 and 2; Hamsini, slides 3 and 4; Vibhas, slides 5 and 6; Alex, slides 7 and 8. The team should confirm the assignment and rehearse aloud.
 
-We are Team E: Jennifer Lee, Hamsini Tankala, Vibhas Nair, and Alex Tang. Our project is Adcut Logo Vectorizer, and our client contact is Nick Dokich. Adcut needs to turn customer logo images into geometry for its water jet cutting workflow. Our application will prepare those drawings for downstream CAD tools. Today we will cover the employee workflow, interface design, system metaphor, architecture, and selected development platform.
+## Slide 1: Adcut Logo Vectorizer (40 seconds)
 
-## 2. Users and workflow (65 seconds)
+> Good morning. We are Team E: Jennifer Lee, Hamsini Tankala, Vibhas Nair, and Alex Tang. Our client contact is Nick Dokich from Adcut. Adcut creates custom flooring and turf designs, and the company needs a faster way to turn customer logo images into geometry that can be prepared for water jet cutting. Our project is Adcut Logo Vectorizer. We are designing a Windows application that separates the colored sections of a logo, traces their boundaries, and exports CAD geometry for Adcut's existing workflow. Today, we will explain the user workflow, interface, system metaphor, architecture, and development platform.
 
-The intended users are Adcut owners and employees. A customer supplies artwork, often a photo or raster logo. Employees need to turn its colored regions into usable cutting geometry. The core interaction is to upload the artwork and download a DXF file that works in the downstream machine workflow. Color boundaries matter: even when two colors use the same material, the client wants those colors represented as distinct sections. Our processing pipeline will identify those regions and trace their boundaries. We will ask for an explicit physical output dimension so that pixels do not silently determine fabrication size. The application prepares geometry; CAD and CAM software still handle the cutting job.
+## Slide 2: From customer artwork to CAD geometry (65 seconds)
 
-## 3. Scope and cutting quality (70 seconds)
+> The intended users are Adcut owners and employees. A customer may send a JPEG, PNG, or another image that looks correct on screen but does not contain usable cutting geometry. The employee first uploads that artwork. The application then identifies each distinct color region. The client told us that different colors must remain separate regions even when they represent the same material, so we cannot merge regions simply because their material is identical. Next, the application traces closed boundaries and converts suitable shapes into smooth CAD geometry. The employee enters a physical output dimension and units because pixel size alone cannot determine fabrication size. The minimum successful workflow is simple: upload the image, process it, and download a DXF that works in Adcut's downstream CAD and cutting process.
 
-The confirmed core is image upload, vectorization, and usable file export. Preview and editing are optional rather than prerequisites to the basic workflow. Nick highlighted a problem he encountered with a competing tool: curved shapes became many short straight segments. We therefore plan native circles and arcs where the geometry supports them. That is a design objective, not a solved tracing result. DXF is our first export target. The client also prefers DWG and can use SVG as a fallback. We still need confirmation of DXF conventions, units, layers, tolerances, and accepted entities. PDF region selection and correction of enlarged low-resolution artwork are further design topics, not approved core requirements.
+## Slide 3: Cutting quality depends on geometry (70 seconds)
 
-## 4. Interface design (75 seconds)
+> Visual similarity is not enough for this project. Nick described a problem with another vectorization tool: it can represent a curve with thousands of short straight segments. The result may look round on a monitor, but that geometry can reduce cutting quality and make the CAD file harder to edit. The comparison on this slide shows that difference. On the left, a circle consists of many small segments and control points. On the right, one native circle describes the same shape cleanly. Our design therefore treats native lines, circles, and arcs as a quality goal whenever the source supports them. DXF is our first export target. The client also prefers DWG and can use SVG as a fallback, but exact DXF conventions and native DWG feasibility still require validation.
 
-This is a static mockup of the planned local browser interface. The employee selects artwork, enters the required output width and units, and starts conversion. Color controls belong to the proposed design and still need validation against sample artwork. An optional preview can show the source and traced boundaries, alongside warnings that require review. Download becomes available only after conversion and validation succeed. Invalid files should leave the previous job untouched and produce a specific error. If geometry cannot be exported reliably, the system should explain the issue rather than offer a file as though it were ready for cutting. The preview does not prove machine compatibility; downstream import testing is still required.
+## Slide 4: Proposed employee interface (75 seconds)
 
-## 5. System metaphor (50 seconds)
+> This is our proposed interface for the initial workflow. The employee chooses an artwork file, enters the required output width, and selects millimeters or inches. The color-region setting allows the employee to guide the initial separation when automatic detection needs help. After the employee selects Convert, the application reports its current stage and prevents duplicate conversion requests. The optional preview compares the source artwork with traced boundaries and displays warnings when geometry needs review. Download DXF becomes available only after conversion and validation succeed. If the file is invalid or the geometry cannot be exported reliably, the interface keeps the employee's settings and explains what needs correction. Changing the source or scale invalidates the previous download so that an outdated file cannot be mistaken for the current result.
 
-Our system metaphor is a digital stencil workshop. The artwork is the pattern, and the distinct colored sections become stencil pieces. Tracing describes each piece's edge. Curve fitting refines the geometry, and the DXF package carries those templates into CAD preparation. This vocabulary connects the user workflow to our modules. It also sets a useful boundary: the workshop prepares templates, but does not run the water jet or reconstruct detail missing from a blurry image. Adjacent stencil pieces also remind us that shared borders require careful handling so that we do not accidentally produce duplicate cutting instructions.
+## Slide 5: System metaphor: a digital stencil workshop (50 seconds)
 
-## 6. Architecture (85 seconds)
+> Our system metaphor is a digital stencil workshop. The customer's artwork is the pattern. Each distinct color region becomes a separate stencil piece. Tracing defines the edge of each piece, and curve fitting improves that edge for CAD use. The final DXF packages the pieces for downstream preparation. This metaphor gives the team a consistent vocabulary for the system. It also clarifies two important boundaries. First, the application prepares geometry but does not operate the water jet. Second, it cannot recreate detail that is missing from a blurry image. The stencil idea also helps us reason about adjacent regions, because neighboring pieces can share an edge without requiring two unintended cuts.
 
-The Streamlit interface manages files, settings, progress, and downloads. Input adapters decode artwork into an image representation. The processing layer segments colors and builds region boundaries with holes and adjacency information. A separate geometry stage will fit supported curves and apply the chosen physical scale. A validator checks closure, finite coordinates, degenerate entities, and duplicate boundaries before the export adapter writes DXF. Keeping this logic outside the UI allows tests to run without a browser. The existing foundation demonstrates native-circle DXF serialization with seven automated tests and a passing Windows check. It does not yet convert images. AutoCAD and IGEMS validation sit outside the application and require client samples and access to the target workflow.
+## Slide 6: Proposed system architecture (85 seconds)
 
-## 7. Platform (65 seconds)
+> The interface layer uses Streamlit and handles file selection, settings, progress, warnings, and downloads. Input adapters decode image formats with Pillow and will later rasterize PDF pages with pypdfium2. The processing layer uses OpenCV and NumPy to reduce colors, identify regions, and extract boundaries. A separate geometry stage will preserve holes and shared edges, fit lines, circles, and arcs, and apply the selected physical scale. Before export, validation checks for open paths, invalid coordinates, degenerate entities, and unintended duplicate boundaries. The export adapter uses ezdxf to write native DXF entities. Keeping processing and export logic separate from the interface allows us to test them without a browser. Our current foundation exports native circles and has seven automated tests. Image-to-DXF conversion, arc fitting, and shared-boundary processing remain implementation work. AutoCAD and IGEMS import are external acceptance steps.
 
-We selected Python 3.11 and a local Streamlit browser interface for Windows. This keeps the UI and image-processing code in one language while we work on the geometry problems. OpenCV and NumPy provide image processing and contour operations. Pillow handles image decoding, and pypdfium2 is selected for later PDF rasterization. ezdxf handles DXF serialization. We use VS Code and GitHub, with pytest, Ruff, and pre-commit for development checks. Local execution is our initial deployment decision, not a client prohibition on cloud hosting. Hardware sizing and processing time need representative-file measurements. Native DWG export remains a separate feasibility question.
+## Slide 7: Selected development platform (65 seconds)
 
-## 8. Progress and validation (50 seconds)
+> We selected Python 3.11 with Streamlit for the initial Windows application. This keeps the interface and image-processing pipeline in one language while we solve the geometry problems. OpenCV and NumPy support segmentation and contour operations. Pillow handles raster image decoding, pypdfium2 is planned for PDF input, and ezdxf serializes the DXF output. We use VS Code and GitHub for development, with pytest, Ruff, pre-commit, and Windows continuous integration for automated checks. The application will run locally through a browser interface. The client allows cloud hosting, but local execution avoids sending customer artwork to an external service during the initial version. React or Vue could support richer editing later. Native DWG export remains a separate feasibility and licensing question.
 
-The website now contains the revised specifications, platform decision, architecture, system metaphor, and interface design. The separate development repository contains the tested native-circle export foundation. The next implementation work is the image-processing pipeline, shared-boundary handling, and curve fitting. The key external dependencies are representative artwork, accepted CAD examples, and confirmation of the target export conventions. Our acceptance endpoint is a DXF that works in Adcut's actual workflow. We have not performed that acceptance test yet. Thank you; we welcome questions about the design and the validation approach.
+## Slide 8: Current evidence and next validation (50 seconds)
 
-## Questions and concise answers
+> For the midterm, we have completed the updated specifications, interface design, system metaphor, architecture, platform decision, and technical design baseline. The private development repository contains a native-circle DXF exporter, seven passing tests, and a passing Windows check. We are not presenting a finished converter, and we have not yet validated output in Adcut's machine workflow. The next technical work is image decoding, color segmentation, region topology, shared-boundary handling, and curve fitting. We also need permitted sample artwork and accepted CAD examples from Adcut. Those samples will let us confirm units, scale, layers, DXF version, supported entities, and error tolerances. Our final acceptance target is a DXF that Adcut can successfully use in its existing workflow. Thank you. We are ready for questions.
 
-- **Why Streamlit instead of React?** It keeps the initial workflow in one Python codebase. Rich manual editing could justify a different UI later, but editing is not confirmed as core.
-- **Why not just export every contour as line segments?** The client reports that excessive short segments hurt cutting quality. We need to test curve fitting and entity quality as well as visual similarity.
-- **Does the tool produce DWG?** Not currently. DXF is the first target. Native DWG needs a separately reviewed conversion approach and licensing decision.
-- **What is already running?** A native-circle DXF export foundation with automated tests. The full image converter has not been implemented.
-- **How will you prove correctness?** Synthetic geometry fixtures first, then permitted client artwork and accepted CAD references, then AutoCAD/IGEMS import and client acceptance. Exact tolerances remain unconfirmed.
-- **Can a blurry image become an accurate ten-foot logo?** Scaling alone cannot recover missing information. Warnings and review are necessary; accuracy claims require sample-based validation.
-- **What does the client still need to provide?** Representative artwork, accepted outputs, tool versions, DXF conventions, and agreed acceptance tolerances.
+## Prepared answers for likely questions
+
+**Why Streamlit instead of React or Vue?**
+
+> Streamlit keeps the initial interface and processing pipeline in one Python codebase. A richer manual editor could justify a separate frontend later, but manual editing is not confirmed as part of the core workflow.
+
+**Why not export every contour as line segments?**
+
+> The client reports that excessive short segments reduce cutting quality and make files harder to work with. We need to evaluate entity quality and geometric error, not only visual similarity.
+
+**Does the application produce DWG files?**
+
+> Not in the initial design. DXF is the first target. Native DWG requires a separate conversion approach and a licensing review.
+
+**What currently works?**
+
+> The development foundation exports native circle entities to DXF and has seven automated tests. The full image conversion pipeline has not been implemented.
+
+**How will the team prove that the output is correct?**
+
+> We will start with synthetic shapes whose geometry is known. Then we will test permitted client artwork and accepted CAD examples. Final validation requires successful import into AutoCAD or IGEMS and confirmation from Adcut. Exact tolerances still need client input.
+
+**Can the application make a blurry logo accurate at a ten-foot size?**
+
+> Scaling cannot recover missing detail. The application should warn the employee when the source quality limits the output, and any accuracy claim must come from sample-based testing.
 
 ## Reference basis
 
-Project facts reflect the client responses supplied to the team. Course format follows https://www.cs.unc.edu/~stotts/COMP523-F26/midTerm.html and the Fall 2026 portion of https://www.cs.unc.edu/~stotts/COMP523-F26/calendar.html. The course requires all four members to contribute and speak. The team must review and revise these materials, perform its own rehearsal, and confirm submission.
+Project facts reflect the client responses supplied to the team. Course format follows https://www.cs.unc.edu/~stotts/COMP523-F26/midTerm.html and the Fall 2026 portion of https://www.cs.unc.edu/~stotts/COMP523-F26/calendar.html. The generated presentation images are representative illustrations and do not depict Adcut's actual equipment, artwork, or output.
