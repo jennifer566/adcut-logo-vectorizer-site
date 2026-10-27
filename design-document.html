@@ -27,6 +27,7 @@
     <nav class="site-nav" aria-label="Main navigation" data-nav>
       <a href="index.html">Home</a>
       <a href="meetings.html">Meetings</a>
+      <a href="assignments.html">Assignments</a>
       <a href="deliverables.html" aria-current="location">Deliverables</a>
       <a class="nav-cta" href="index.html#contact">Contact</a>
     </nav>
@@ -40,7 +41,13 @@
 
     <section id="architecture">
       <h2>System architecture</h2>
-      <img class="document-figure" src="assets/design-architecture.png" alt="Proposed architecture with interface, input, region processing, geometry, export, and external acceptance stages." width="1280" height="720">
+      <div class="architecture-flow" aria-label="System architecture from upload through CAD validation">
+        <div><strong>1. Interface</strong><span>Streamlit upload, scale, settings, preview, and downloads</span></div>
+        <div><strong>2. Decode</strong><span>Pillow and pypdfium2 normalize raster, GIF, and PDF input</span></div>
+        <div><strong>3. Trace</strong><span>VTracer clusters colors and creates spline-mode SVG paths</span></div>
+        <div><strong>4. Geometry</strong><span>svgelements parses paths while retaining lines and Bezier curves</span></div>
+        <div><strong>5. Export</strong><span>ezdxf writes scaled layers, polylines, and native SPLINE entities</span></div>
+      </div>
       <p>The design separates the user interface from image processing, geometry construction, validation, and export. This separation allows the processing and export logic to be tested without running the browser interface.</p>
 
       <h3>Component responsibilities</h3>
@@ -51,8 +58,8 @@
         <tbody>
           <tr><td>Interface</td><td>Accept artwork and scale settings, report progress and warnings, and provide the matching download.</td><td>Streamlit</td></tr>
           <tr><td>Input adapters</td><td>Decode supported images and retain source metadata. PDF page or region selection remains a later design decision.</td><td>Pillow and pypdfium2</td></tr>
-          <tr><td>Region processing</td><td>Reduce colors, identify distinct regions, and preserve holes and adjacency.</td><td>OpenCV and NumPy</td></tr>
-          <tr><td>Geometry</td><td>Construct closed boundaries, manage shared edges, fit suitable lines, circles, and arcs, and apply physical scale.</td><td>Python geometry modules</td></tr>
+          <tr><td>Region processing</td><td>Cluster colors and trace distinct closed regions into SVG paths.</td><td>VTracer in spline and cutout modes</td></tr>
+          <tr><td>Geometry</td><td>Parse SVG path commands, retain Bezier curves, apply scale, and prepare shared-edge and circle/arc recognition work.</td><td>svgelements and Python geometry modules</td></tr>
           <tr><td>Validation and export</td><td>Reject invalid or degenerate geometry and serialize supported CAD entities.</td><td>ezdxf</td></tr>
           <tr><td>External acceptance</td><td>Confirm that exported files import correctly and work in Adcut's downstream process.</td><td>AutoCAD, IGEMS, and client review</td></tr>
         </tbody>
@@ -82,13 +89,15 @@
     <section id="decisions">
       <h2>Current design decisions</h2>
       <ul>
-        <li>Python 3.11 and Streamlit provide the initial local Windows application.</li>
-        <li>OpenCV and NumPy support color and contour processing.</li>
+        <li>Python 3.11-3.13 and Streamlit provide the local application.</li>
+        <li>VTracer performs color clustering and spline-mode SVG tracing.</li>
+        <li>svgelements parses SVG lines and Bezier curves for CAD conversion.</li>
         <li>Pillow handles raster image decoding; pypdfium2 renders the first PDF page in the current build.</li>
         <li>ezdxf provides DXF serialization using native CAD entities where possible.</li>
-        <li>pytest, Ruff, pre-commit, and Windows continuous integration provide development checks.</li>
+        <li>uv locks dependencies and runs repeatable commands on Windows, Linux, and macOS.</li>
+        <li>pytest, Ruff, pre-commit, and a nine-job operating-system/Python CI matrix provide development checks.</li>
       </ul>
-      <p>The current development build accepts JPEG, PNG, WEBP, GIF, and PDF inputs; performs color reduction and contour tracing; previews detected boundaries; and exports closed color-region paths to SVG and DXF. The repository includes three original test images, fourteen passing automated tests, and passing formatting and Windows continuous-integration checks. Native circle and arc fitting, shared-boundary deduplication, manual editing, and downstream acceptance testing remain implementation work.</p>
+      <p>The current development build accepts JPEG, PNG, WEBP, GIF, and PDF inputs; creates color-separated SVG paths; previews traced curves; and exports SVG plus DXF R2000 with native SPLINE entities. The repository includes three original test images, seventeen passing automated tests, and passing checks on Windows, Linux, and macOS. Native circle and arc recognition, shared-boundary deduplication, manual editing, and downstream acceptance testing remain implementation work.</p>
     </section>
 
     <section id="open-decisions">

@@ -27,6 +27,7 @@
     <nav class="site-nav" aria-label="Main navigation" data-nav>
       <a href="index.html" aria-current="page">Home</a>
       <a href="meetings.html">Meetings</a>
+      <a href="assignments.html">Assignments</a>
       <a href="deliverables.html">Deliverables</a>
       <a class="nav-cta" href="#contact">Contact</a>
     </nav>
@@ -170,7 +171,7 @@
           <p class="eyebrow">Technical Design</p>
           <h2>An open-source local pipeline built for operator control.</h2>
         </div>
-        <p>Starting platform selected October 4: Python 3.11, Streamlit, OpenCV, and ezdxf on Windows. The current development build accepts the planned input formats, reduces colors, traces closed foreground paths, previews detected boundaries, and exports SVG and DXF files. See the <a href="design-document.html">D2 design document</a> for the architecture, platform decisions, system metaphor, and remaining validation work.</p>
+        <p>The current platform uses Python 3.11-3.13, Streamlit, VTracer, svgelements, and ezdxf. The local application accepts the planned input formats, traces color regions into SVG curves, preserves Bezier geometry as native DXF splines, and exports SVG and DXF files. See the <a href="design-document.html">D2 design document</a> for the architecture, platform decisions, system metaphor, and remaining validation work.</p>
         <div class="tech-layout">
           <article class="tech-panel large">
             <h3>Application Layer</h3>
@@ -178,11 +179,11 @@
           </article>
           <article class="tech-panel">
             <h3>Image Processing</h3>
-            <p>OpenCV handles preprocessing, color clustering, cleanup, contour detection, and preview generation.</p>
+            <p>Pillow and pypdfium2 decode uploads. VTracer performs color clustering and spline-mode SVG tracing.</p>
           </article>
           <article class="tech-panel">
             <h3>Vector Tracing</h3>
-            <p>OpenCV contours provide the starting geometry. Circle and arc fitting, shared boundaries, and tolerances require implementation and validation. Potrace/vtracer remain comparison options.</p>
+            <p>svgelements parses SVG paths while preserving cubic and quadratic Bezier curves. Circle and arc recognition, shared boundaries, and tolerances still require implementation and validation.</p>
           </article>
           <article class="tech-panel">
             <h3>CAD Export</h3>
@@ -190,7 +191,7 @@
           </article>
           <article class="tech-panel">
             <h3>Packaging</h3>
-            <p>Begin with a Python virtual environment on Windows. Evaluate PyInstaller packaging after the core workflow is reliable; cloud hosting remains an option.</p>
+            <p>uv provides locked, repeatable Python environments on Windows, Linux, and macOS. A Windows package remains planned for client handoff after CAD validation.</p>
           </article>
         </div>
       </div>
@@ -289,9 +290,12 @@
           <a href="https://www.cs.unc.edu/~stotts/COMP523-F26/funcSpec.html">COMP 523 specifications guide</a>
           <a href="https://github.com/jennifer566/adcut-logo-vectorizer-site">Project website repository</a>
           <a href="https://github.com/jennifer566/adcut-logo-vectorizer">Public development repository</a>
+          <a href="https://github.com/users/jennifer566/projects/3">Development project board</a>
           <a href="https://adcut.net/">Adcut products and services</a>
           <a href="https://vectable.ai/">Vectable (client-suggested reference)</a>
-          <a href="https://opencv.org/">OpenCV</a>
+          <a href="https://github.com/visioncortex/vtracer">VTracer</a>
+          <a href="https://github.com/meerk40t/svgelements">svgelements</a>
+          <a href="https://docs.astral.sh/uv/">uv</a>
           <a href="https://ezdxf.readthedocs.io/">ezdxf</a>
         </div>
       </div>

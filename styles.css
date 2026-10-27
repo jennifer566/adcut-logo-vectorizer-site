@@ -885,6 +885,66 @@ address a {
   background: var(--unc-navy);
 }
 
+.architecture-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.architecture-flow article {
+  position: relative;
+  padding: 20px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: 0 14px 34px rgba(19, 41, 75, 0.08);
+}
+
+.architecture-flow article:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  z-index: 1;
+  width: 12px;
+  color: var(--unc-navy);
+  content: "→";
+  transform: translateY(-50%);
+}
+
+.architecture-flow strong,
+.architecture-flow small {
+  display: block;
+}
+
+.architecture-flow small {
+  margin-top: 8px;
+  color: #5b6b80;
+  line-height: 1.45;
+}
+
+.supporting-deliverables {
+  margin-top: 36px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+}
+
+.document-download {
+  display: inline-flex;
+}
+
+code {
+  padding: 0.12em 0.35em;
+  border-radius: 5px;
+  color: var(--unc-navy);
+  background: #eaf4fb;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+}
+
 .site-footer {
   color: #6d7b8f;
   background: #071a33;
@@ -934,6 +994,14 @@ address a {
   .roles-grid,
   .links-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .architecture-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .architecture-flow article::after {
+    display: none;
   }
 }
 
@@ -996,7 +1064,8 @@ address a {
   .team-grid,
   .roles-grid,
   .requirements-grid,
-  .links-grid {
+  .links-grid,
+  .architecture-flow {
     grid-template-columns: 1fr;
   }
 

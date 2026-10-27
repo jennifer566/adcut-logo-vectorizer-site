@@ -1,4 +1,4 @@
-# Course and project tasks - October 4, 2026
+# Course and project tasks - October 26, 2026
 
 ## Completed in this update
 
@@ -9,15 +9,19 @@
 - [x] Publish the midterm architecture diagram, UI mockup, system metaphor, and technical design baseline with contracts, geometry invariants, interaction states, and validation strategy.
 - [x] Publish the editable eight-slide PowerPoint with a full speaking script, suggested four-person allocation, timing guidance, and Q&A notes.
 - [x] Create a separate private development repository with a native-circle exporter, seven tests, Windows CI, formatting and commit hooks, setup instructions, and implementation backlog.
+- [x] Make the development repository public and document the VTracer, SVG-curve, svgelements, ezdxf, and uv workflow.
+- [x] Publish the Ethics 1 analysis under a new Assignments page.
+- [x] Prepare the image-vectorization tech talk, exact speaker notes, and repeatable demonstration tutorial for November 4.
+- [x] Publish the D3 test plan, documentation plan, initial D4 user manual, and client handoff plan.
+- [x] Record weekly October TA meetings and current implementation progress in reverse chronological order.
 
-## Human tasks before October 5 class
+## Team review and delivery tasks
 
-- [ ] All four members review and substantially revise the written/deck drafts as needed under the course AI guidance.
-- [ ] Assign speaking parts and perform a timed rehearsal within the 10-12 minute slot including questions and transitions.
-- [ ] Open the PPTX on the presenting computer and check projector/podium access.
+- [ ] All four members review and revise the ethics analysis, plans, user manual, and tech-talk materials under the course AI guidance.
+- [ ] Rehearse the tech talk to 18 minutes of material plus 2 minutes for transitions and questions.
+- [ ] Open the tech-talk PPTX on the presenting computer and complete the live-demo fallback check.
 - [ ] Confirm the instructor received the project URL and has the required access.
-- [ ] Agree a tech-talk topic and confirm/email it to the instructor. It was due at end of week of September 21. Suggested topic: native CAD curves versus segmented raster tracing.
-- [ ] Attend October 5, 7, and 12 presentation sessions; all teams must be ready October 5.
+- [ ] Confirm the image-vectorization topic and November 4 Team E slot with the instructor if that confirmation is not already recorded.
 
 ## Information and implementation still required
 
@@ -25,29 +29,21 @@
 - [ ] Reconcile this new repository with the repository Nick offered, to avoid splitting development history.
 - [ ] Obtain permitted sample artwork and accepted CAD outputs.
 - [ ] Confirm actual DXF version, units, layers, scale, arc conventions, tool versions, and acceptance tolerances with Adcut.
-- [ ] Build upload, segmentation, shared-boundary tracing, curve fitting, SVG fallback, and the Streamlit interface.
+- [x] Build upload, color reduction, VTracer spline tracing, SVG preview/export, DXF R2000 export, and the Streamlit interface.
+- [x] Add uv dependency management and a Windows/Linux/macOS, Python 3.11-3.13 test matrix.
+- [x] Preserve native Bezier curves as DXF SPLINE entities and document the vectorization pipeline.
 - [ ] Validate holes, adjacent regions, small logos enlarged to fabrication scale, and AutoCAD/IGEMS imports.
 - [ ] Decide DWG export, PDF region selection, and editing scope after feasibility work.
-- [ ] Record actual meetings and progress since September 21. Do not fabricate dates, attendance, decisions, or implementation progress.
-- [ ] Prepare the ethics assignment due at end of week of October 19.
-
-## Draft tech-talk email (not sent)
-
-To: help-comp523@cs.unc.edu
-Subject: COMP 523 Team E - Proposed Tech Talk Topic
-
-Hello Professor Stotts,
-
-Team E proposes a tech talk on representing raster logo boundaries as native CAD lines and arcs, including why excessive short segments can reduce water jet cutting quality. We would cover the difference between visual tracing and usable CAD geometry, DXF entities, and validation in downstream CAD software.
-
-Please let us know whether this scope is suitable. Our project website is https://jennifer566.github.io/adcut-logo-vectorizer-site/.
-
-Thank you,
-COMP 523 Team E
+- [x] Record confirmed weekly TA meetings and repository-backed progress through October 20.
+- [x] Prepare the Ethics 1 assignment.
 
 ## Sources
 
 - https://www.cs.unc.edu/~stotts/COMP523-F26/calendar.html
-- https://www.cs.unc.edu/~stotts/COMP523-F26/midTerm.html
+- https://www.cs.unc.edu/~stotts/COMP523-F26/techTalk.html
+- https://www.cs.unc.edu/~stotts/COMP523-F26/ethics1.html
+- https://www.cs.unc.edu/~stotts/COMP523-F26/testing.html
+- https://www.cs.unc.edu/~stotts/COMP523-F26/documentation.html
+- https://www.cs.unc.edu/~stotts/COMP523-F26/handoff.html
 
-The calendar states end-of-week deadlines without exact hours. The midterm slot is 10-12 minutes total. The page's separate 3-4 minute estimate per member conflicts with four speakers in that slot, so rehearse to the total limit.
+Client-controlled sample files, CAD versions, acceptance criteria, production access, and final handoff appointments remain pending and must not be presented as confirmed.

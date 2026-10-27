@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Team E Ethics 1 discussion for UNC COMP 523.">
+  <title>Ethics 1 | Adcut Logo Vectorizer</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header" data-header>
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">A</span><span><strong>Adcut Logo Vectorizer</strong><small>UNC COMP 523</small></span></a>
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle><span></span><span></span><span></span></button>
+    <nav class="site-nav" aria-label="Main navigation" data-nav><a href="index.html">Home</a><a href="meetings.html">Meetings</a><a href="assignments.html" aria-current="location">Assignments</a><a href="deliverables.html">Deliverables</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
+  </header>
+  <main class="spec-document content-shell section-pad" id="top">
+    <p><a href="assignments.html">Back to assignments</a></p>
+    <p class="eyebrow">Ethics 1</p><h1>Software systems and professional responsibility</h1>
+    <p><strong>Team conclusion:</strong> Software engineers remain responsible for foreseeable harm even when failures involve management, policy, hardware, or user behavior. Ethical practice requires honest system behavior, independent safety controls, meaningful consent, evidence-based testing, and escalation when an organization asks engineers to conceal risk.</p>
+
+    <section>
+      <h2>1. Therac-25 radiation overdoses</h2>
+      <p>Between 1985 and 1987, six known Therac-25 accidents delivered massive radiation overdoses, causing deaths and serious injuries. The system relied heavily on software while removing hardware safety mechanisms used in earlier machines. Investigation also identified weak testing, poor incident follow-up, inadequate documentation, and overconfidence in software reliability.</p>
+      <p><strong>Why this was unethical:</strong> A safety-critical product reached patients without adequate independent safeguards, hazard analysis, or effective reporting. Operators received obscure error messages and could not understand the danger.</p>
+      <p><strong>Responsibility:</strong> Both the product and engineering process were problematic. Race conditions and unsafe control logic created direct hazards, while organizational decisions removed redundancy and discounted evidence from earlier accidents.</p>
+      <p><strong>Lesson for Team E:</strong> Software-generated CAD must remain a review artifact until scale, geometry, downstream imports, and physical cutting are validated. Warnings cannot replace technical safeguards.</p>
+      <p><a href="https://web.mit.edu/6.033/2004/wwwdocs/papers/Therac_1.html">Leveson and Turner, “An Investigation of the Therac-25 Accidents”</a></p>
+    </section>
+
+    <section>
+      <h2>2. Volkswagen emissions defeat devices</h2>
+      <p>Volkswagen installed software that detected emissions testing conditions and changed vehicle behavior to pass the test. The U.S. Environmental Protection Agency reports that approximately 590,000 affected diesel vehicles used software designed to cheat federal emissions tests.</p>
+      <p><strong>Why this was unethical:</strong> The software intentionally presented regulators and customers with false behavior while allowing substantially higher pollution during ordinary driving. The deception shifted health and environmental costs to the public.</p>
+      <p><strong>Responsibility:</strong> Engineer behavior and product behavior were inseparable. The code performed the deception, but people designed, approved, tested, and shipped it. Schedule or management pressure would not remove an engineer's duty to object and escalate.</p>
+      <p><strong>Lesson for Team E:</strong> Export validation must measure the same files and settings that users will employ. A special demonstration path cannot stand in for evidence from normal operation.</p>
+      <p><a href="https://www.epa.gov/vw/learn-about-volkswagen-violations">U.S. EPA, “Learn About Volkswagen Violations”</a></p>
+    </section>
+
+    <section>
+      <h2>3. Cambridge Analytica and Facebook data</h2>
+      <p>The Federal Trade Commission alleged that Cambridge Analytica and associated parties used deceptive tactics to collect Facebook profile data from tens of millions of people for voter profiling and targeting. Many affected people did not directly install the application that collected their information.</p>
+      <p><strong>Why this was unethical:</strong> People lacked meaningful notice and consent for the collection and political use of their personal information. Platform design allowed one person's decision to expose data about others.</p>
+      <p><strong>Responsibility:</strong> The data-collection software implemented the harmful behavior, while developers, executives, and platform owners made policy and architecture decisions that enabled it. Compliance language did not compensate for misleading consent.</p>
+      <p><strong>Lesson for Team E:</strong> Customer artwork should stay local, should not enter external services without permission, and should never be committed to a public repository unless the client authorizes publication.</p>
+      <p><a href="https://www.ftc.gov/legal-library/browse/cases-proceedings/182-3107-cambridge-analytica-llc-matter">Federal Trade Commission, Cambridge Analytica matter</a></p>
+    </section>
+
+    <section><h2>Shared principles</h2><ul><li>Test against foreseeable misuse, invalid input, and failure conditions.</li><li>Preserve independent safeguards when software controls safety-critical outcomes.</li><li>Report limitations plainly and never design a system to mislead auditors, users, or regulators.</li><li>Minimize collection of customer data and obtain explicit permission before sharing it.</li><li>Document evidence, unresolved risk, and escalation decisions so responsibility remains visible.</li></ul></section>
+  </main>
+  <footer class="site-footer"><div class="content-shell footer-inner"><p>Adcut Logo Vectorizer, UNC COMP 523</p><a href="#top">Back to top</a></div></footer><script src="script.js"></script>
+</body>
+</html>

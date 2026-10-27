@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Team E image vectorization tech talk, demonstration, and tutorial.">
+  <title>Image Vectorization Tech Talk | Adcut Logo Vectorizer</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header" data-header>
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">A</span><span><strong>Adcut Logo Vectorizer</strong><small>UNC COMP 523</small></span></a>
+    <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle><span></span><span></span><span></span></button>
+    <nav class="site-nav" aria-label="Main navigation" data-nav><a href="index.html">Home</a><a href="meetings.html">Meetings</a><a href="assignments.html" aria-current="location">Assignments</a><a href="deliverables.html">Deliverables</a><a class="nav-cta" href="index.html#contact">Contact</a></nav>
+  </header>
+  <main class="spec-document content-shell section-pad" id="top">
+    <p><a href="assignments.html">Back to assignments</a></p>
+    <p class="eyebrow">Tech Talk / November 4, 2026</p><h1>Image Vectorization</h1>
+    <p>A 20-minute tutorial explaining how raster artwork becomes scalable SVG paths and CAD geometry. Every Team E member participates in preparation and delivery.</p>
+    <p><a class="button primary document-download" href="assets/image-vectorization-tech-talk.pptx" download>Download PowerPoint</a></p>
+
+    <section><h2>Presentation roles and timing</h2>
+      <table class="course-checklist"><thead><tr><th>Presenter</th><th>Slides</th><th>Planned time</th></tr></thead><tbody>
+        <tr><td>Jennifer Lee</td><td>1-3: motivation, raster versus vector</td><td>4 minutes</td></tr>
+        <tr><td>Hamsini Tankala</td><td>4-6: pipeline, color segmentation, curves</td><td>4 minutes</td></tr>
+        <tr><td>Vibhas Nair</td><td>7-9: topology, formats, live demonstration</td><td>6 minutes</td></tr>
+        <tr><td>Alex Tang</td><td>10-12: quality, implementation, repeatable tutorial</td><td>4 minutes</td></tr>
+      </tbody></table><p>The remaining two minutes cover transitions and questions. The deck includes exact speaker notes and a fallback demonstration path.</p>
+    </section>
+
+    <section><h2>Repeat the demonstration</h2><ol>
+      <li>Install <a href="https://docs.astral.sh/uv/">uv</a>, clone the <a href="https://github.com/jennifer566/adcut-logo-vectorizer">development repository</a>, and open a terminal in the repository.</li>
+      <li>Run <code>uv sync --locked --dev</code> to create the locked environment.</li>
+      <li>Run <code>uv run streamlit run app.py</code> and open <code>http://localhost:8501</code>.</li>
+      <li>Upload <code>examples/holes-and-curves.png</code>.</li>
+      <li>Set output width to 10 inches, maximum colors to 4, curve simplification to 1.5 pixels, and keep the dominant border color ignored.</li>
+      <li>Compare the raster source with the SVG curve preview. Record color-region, closed-path, and curve-segment counts.</li>
+      <li>Download both SVG and DXF. Open the SVG in a browser and inspect its path data in a text editor.</li>
+      <li>Inspect DXF entities with <code>uv run python -c "import ezdxf; d=ezdxf.readfile('adcut-vectorized.dxf'); print([(e.dxftype(), e.dxf.layer) for e in d.modelspace()])"</code>.</li>
+      <li>Explain that successful serialization does not establish fabrication readiness. Scale, topology, CAD import, and client acceptance still require validation.</li>
+    </ol></section>
+
+    <section><h2>Demo fallback</h2><p>If the live application cannot start, use the three repository samples and the deck's captured outputs. Walk through the same controls, show the SVG path commands, and use the automated test results as evidence. Do not substitute unverified customer artwork.</p></section>
+    <section><h2>Technical references</h2><ul><li><a href="https://github.com/visioncortex/vtracer">VTracer project and tracing modes</a></li><li><a href="https://www.w3.org/TR/SVG/paths.html">W3C SVG path specification</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorials/SVG_from_scratch/Paths">MDN SVG path tutorial</a></li><li><a href="https://ezdxf.readthedocs.io/">ezdxf documentation</a></li><li><a href="https://github.com/meerk40t/svgelements">svgelements</a></li></ul></section>
+  </main>
+  <footer class="site-footer"><div class="content-shell footer-inner"><p>Adcut Logo Vectorizer, UNC COMP 523</p><a href="#top">Back to top</a></div></footer><script src="script.js"></script>
+</body>
+</html>

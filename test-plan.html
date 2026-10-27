@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="D3 test plan for the Adcut Logo Vectorizer."><title>D3 Test Plan | Adcut Logo Vectorizer</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+  <header class="site-header" data-header><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">A</span><span><strong>Adcut Logo Vectorizer</strong><small>UNC COMP 523</small></span></a><button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle><span></span><span></span><span></span></button><nav class="site-nav" aria-label="Main navigation" data-nav><a href="index.html">Home</a><a href="meetings.html">Meetings</a><a href="assignments.html">Assignments</a><a href="deliverables.html" aria-current="location">Deliverables</a><a class="nav-cta" href="index.html#contact">Contact</a></nav></header>
+  <main class="spec-document content-shell section-pad" id="top">
+    <p><a href="deliverables.html">Back to deliverables</a></p><p class="eyebrow">D3 / Test Plan</p><h1>Test Plan</h1>
+    <p><strong>Status:</strong> Executable team plan, updated October 26, 2026. Client CAD versions, permitted production samples, and acceptance dates still require confirmation.</p>
+    <section><h2>Purpose and quality risks</h2><p>This plan gives Team E, the client, and another engineer enough information to repeat the tests. The highest risks are incorrect physical scale, open or duplicate cut paths, loss of holes, excessive segments, unsupported CAD entities, color-region errors, and output that opens successfully but is unsuitable for fabrication.</p></section>
+    <section><h2>Part 1: testing with full time and access</h2><ul><li>Build a client-approved corpus covering clean logos, low-resolution art, transparency, gradients, photographs, many colors, holes, adjacent regions, text, and PDF pages.</li><li>Compare every output with accepted CAD reference files using geometric distance, area, path closure, topology, scale, layer, and native-entity checks.</li><li>Run automated unit, integration, property, fuzz, performance, and regression tests on every supported operating system and Python version.</li><li>Test installation, first use, error recovery, and export with representative Adcut operators.</li><li>Import outputs into every supported AutoCAD and IGEMS version, then complete supervised water-jet trials with approved material and safety procedures.</li><li>Retain expected outputs and signed acceptance results for future regression testing.</li></ul></section>
+    <section><h2>Part 2: committed semester testing</h2><p>Team E will maintain automated tests for deterministic logic and will record manual evidence for the browser workflow and downstream CAD checks. Claims in the final report will distinguish tests that passed from tests that remain blocked.</p>
+      <table class="course-checklist"><thead><tr><th>Level</th><th>Owner and environment</th><th>Evidence</th></tr></thead><tbody>
+        <tr><td>Unit</td><td>Developers; pytest on Python 3.11-3.13</td><td>Decoder, options, scale, closure, SVG, DXF, units, circles, errors, and preview tests</td></tr>
+        <tr><td>Integration</td><td>Developers; repository samples on Windows, Linux, macOS</td><td>Raster-to-SVG-to-DXF runs, entity audit, fixture outputs, CI logs</td></tr>
+        <tr><td>System/UI</td><td>Team E; Windows 11 with Chrome and Edge</td><td>Installation checklist, upload/export scripts, screenshots, downloaded files</td></tr>
+        <tr><td>Acceptance</td><td>Adcut representative with Team E</td><td>Approved samples, AutoCAD/IGEMS import record, scale/layer review, client decision</td></tr>
+      </tbody></table>
+    </section>
+    <section><h2>Environments</h2><ul><li>GitHub Actions: Windows, Ubuntu Linux, and macOS with Python 3.11, 3.12, and 3.13 using the committed <code>uv.lock</code>.</li><li>Primary local check: Windows 11, Python 3.12, Streamlit 1.50 or the locked project version, Chrome and Edge. Exact browser versions will be recorded with results.</li><li>Client environment: Windows workstation. AutoCAD and IGEMS versions remain unconfirmed and must be recorded before acceptance testing.</li><li>Final package: the locked uv workflow is testable now; a standalone Windows package will receive a clean-machine test after packaging is selected.</li></ul></section>
+    <section><h2>Automated regression cases</h2>
+      <table class="course-checklist"><thead><tr><th>ID</th><th>Input/action</th><th>Expected result</th></tr></thead><tbody>
+        <tr><td>UT-01</td><td>Decode JPEG, PNG, WEBP, first GIF frame, and first PDF page</td><td>Normalized RGBA image with correct dimensions</td></tr>
+        <tr><td>UT-02</td><td>Unreadable or mismatched input</td><td>Clear VectorizationError; no export produced</td></tr>
+        <tr><td>UT-03</td><td>Positive width in inches and millimeters</td><td>Proportional dimensions and explicit DXF units</td></tr>
+        <tr><td>UT-04</td><td>Adjacent regions, holes, and curves samples</td><td>Closed parsed paths; known limitations documented</td></tr>
+        <tr><td>UT-05</td><td>SVG export</td><td>Physical width/height, color fills, and closed path commands</td></tr>
+        <tr><td>UT-06</td><td>DXF R2000 export</td><td>Valid audit, named region layers, finite geometry, SPLINE/POLYLINE entities</td></tr>
+        <tr><td>UT-07</td><td>Request R12 with native splines</td><td>Export rejected with an R2000 requirement</td></tr>
+        <tr><td>UT-08</td><td>SVG preview data URI</td><td>Generated VTracer SVG round-trips without raster decoding</td></tr>
+      </tbody></table>
+    </section>
+    <section><h2>Manual system and data tests</h2>
+      <table class="course-checklist"><thead><tr><th>ID</th><th>Procedure</th><th>Oracle</th></tr></thead><tbody>
+        <tr><td>SYS-01</td><td>Fresh clone; run <code>uv sync --locked --dev</code> and launch Streamlit</td><td>No undeclared setup step; application opens locally</td></tr>
+        <tr><td>SYS-02</td><td>Upload each repository sample and vary color count and simplification</td><td>Preview and metrics update; downloads remain available</td></tr>
+        <tr><td>SYS-03</td><td>Download SVG and DXF at 10 in and 254 mm</td><td>Equivalent physical size; expected layers and closed paths</td></tr>
+        <tr><td>SYS-04</td><td>Use a low-resolution, gradient, photo, many-color, and corrupt input</td><td>Useful warning or rejection; no silent claim of fabrication readiness</td></tr>
+        <tr><td>CAD-01</td><td>Import approved outputs into confirmed AutoCAD and IGEMS versions</td><td>Correct scale, layers, closure, holes, curves, and visible geometry</td></tr>
+        <tr><td>CUT-01</td><td>Complete client-approved supervised cut</td><td>Adcut records acceptable or rejected result and reasons</td></tr>
+      </tbody></table>
+    </section>
+    <section><h2>Schedule</h2><ul><li><strong>By November 2:</strong> freeze public samples and expected automated results; assign failures to GitHub issues.</li><li><strong>By November 9:</strong> run the full CI matrix and clean Windows installation test.</li><li><strong>By November 16:</strong> finish browser workflow, invalid-input, scaling, and export inspections.</li><li><strong>November 17-30:</strong> conduct client CAD and acceptance testing when files, software access, and a client representative are available.</li><li><strong>Before final delivery:</strong> rerun all automated tests, package checks, import tests, and the handoff checklist.</li></ul></section>
+    <section><h2>Entry, exit, and reporting</h2><p>A test starts only with versioned code, identified input, recorded settings, and an expected result. A feature exits testing when required automated checks pass, manual evidence is stored, and no unresolved high-severity defect contradicts D1. Failures become GitHub issues with reproduction steps. Client-dependent tests remain “blocked,” never “passed,” until evidence exists.</p></section>
+  </main><footer class="site-footer"><div class="content-shell footer-inner"><p>Adcut Logo Vectorizer, UNC COMP 523</p><a href="#top">Back to top</a></div></footer><script src="script.js"></script>
+</body></html>

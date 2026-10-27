@@ -27,6 +27,7 @@
     <nav class="site-nav" aria-label="Main navigation" data-nav>
       <a href="index.html">Home</a>
       <a href="meetings.html" aria-current="page">Meetings</a>
+      <a href="assignments.html">Assignments</a>
       <a href="deliverables.html">Deliverables</a>
       <a class="nav-cta" href="index.html#contact">Contact</a>
     </nav>
@@ -49,7 +50,7 @@
           <div role="row">
             <span role="cell">TA meeting</span>
             <span role="cell">Weekly on Tuesdays, 10:30-11:00 a.m.</span>
-            <span role="cell">Last meeting: September 15, 2026. Reviewed expectations and <a href="https://hackmd.io/zci0WxDvSfC9OpvXnEK2Aw?view">meeting material on HackMD</a>.</span>
+            <span role="cell">Last completed meeting: October 20, 2026. Weekly progress, testing, documentation, and upcoming course deliverables were reviewed.</span>
           </div>
           <div role="row">
             <span role="cell">Client meeting</span>
@@ -58,7 +59,7 @@
           </div>
           <div role="row">
             <span role="cell">Team meeting</span>
-            <span role="cell">Weekly, time to be confirmed</span>
+            <span role="cell">Weekly, coordinated by the team</span>
             <span role="cell">Used for implementation planning, deliverable updates, and task ownership.</span>
           </div>
         </div>
@@ -74,6 +75,30 @@
           <p>Weekly progress reports follow the TA's Progress, Plans, and Problems format. The TA notes call for an update by 11:59 p.m. the day before the regular meeting slot, including weeks without a meeting, and an email confirmation with the website link.</p>
         </div>
         <div class="journal-list">
+          <article>
+            <time datetime="2026-10-20">October 20, 2026</time>
+            <h3>Weekly TA meeting - testing and documentation planning</h3>
+            <p><strong>Progress:</strong> The team reviewed the running Streamlit workflow, the cross-platform automated test matrix, and the remaining client-validation work. The development board now separates completed implementation milestones from open geometry and acceptance tasks.</p>
+            <p><strong>Decisions:</strong> The team will document the actual vectorization pipeline, keep generated output labeled as unvalidated for fabrication, and prepare the course test, documentation, and client handoff plans.</p>
+            <p><strong>Plans:</strong> Publish D3, the documentation plan, the user manual, and the handoff plan. Prepare the image-vectorization tech talk and a repeatable demonstration with repository samples.</p>
+            <p><strong>Problems:</strong> Representative client artwork, accepted CAD references, exact DXF conventions, AutoCAD/IGEMS validation, and a supervised cutting test remain unavailable.</p>
+          </article>
+          <article>
+            <time datetime="2026-10-13">October 13, 2026</time>
+            <h3>Weekly TA meeting - native curves and project tracking</h3>
+            <p><strong>Progress:</strong> The team replaced segmented contour output with VTracer spline-mode SVG tracing. Cubic and quadratic Bezier paths now remain curves and export as native DXF SPLINE entities. uv dependency management, a committed lockfile, and Windows, Linux, and macOS CI for Python 3.11-3.13 were added.</p>
+            <p><strong>Decisions:</strong> SVG is the structured intermediate representation. Pillow remains responsible only for decoding and normalization, while VTracer performs tracing. Work is tracked on the public GitHub project board.</p>
+            <p><strong>Plans:</strong> Test representative artwork, confirm the DXF contract with Adcut, and continue topology and circle/arc work after acceptance criteria are available.</p>
+            <p><strong>Problems:</strong> Native splines improve curve quality but do not by themselves resolve exact circles, circular arcs, holes, or duplicate shared cut edges.</p>
+          </article>
+          <article>
+            <time datetime="2026-10-06">October 6, 2026</time>
+            <h3>Weekly TA meeting - midterm and runnable build review</h3>
+            <p><strong>Progress:</strong> The team reviewed the midterm presentation, D1 specifications, D2 design document, original sample artwork, and the first runnable image-to-CAD build.</p>
+            <p><strong>Decisions:</strong> Team E's public development repository remains the source of record. Development outputs are review artifacts until dimensions, layers, geometry, and downstream imports are validated.</p>
+            <p><strong>Plans:</strong> Improve curve quality, standardize setup with uv, expand tests across operating systems and Python versions, and move implementation work onto the GitHub project board.</p>
+            <p><strong>Problems:</strong> The first tracing approach produced many short segments and did not yet meet the goal of native CAD curves.</p>
+          </article>
           <article>
             <time datetime="2026-10-04">October 4, 2026</time>
             <h3>Weekly progress report - working conversion build and midterm preparation</h3>
